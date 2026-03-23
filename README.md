@@ -15,7 +15,7 @@ It is not a tool you run. It is a layer you add.
 
 This is an example of a structured, senior-level AI code review generated using the framework.
 
-![AI Code Review Example](./assets/Demo_Screenshot.png)
+![AI Code Review Example](./Assets/Demo_Screenshot.png)
 
 > Example output using presentation-optimized mode with enforced structure and readability.
 
