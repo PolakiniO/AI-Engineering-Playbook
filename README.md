@@ -1,4 +1,4 @@
-# AI Engineering Governance Framework
+# AI-Engineering-Playbook
 
 Make AI coding agents behave like senior engineers.
 
@@ -10,7 +10,7 @@ AI-Engineering-Playbook is a governance framework for Codex and similar AI codin
 - a portable skill system under [`skills/`](./skills)
 - a generic workflow playbook in [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md)
 - templates in [`templates/`](./templates) for adapting the framework safely
-- an example overlay in [`examples/huntr/`](./examples/huntr) showing how one repo specializes the generic core
+- example overlays in [`examples/security-workflow/`](./examples/security-workflow), [`examples/backend-service/`](./examples/backend-service), and [`examples/data-pipeline/`](./examples/data-pipeline) showing how different repos can specialize the generic core
 
 ## Why This Exists
 
@@ -106,7 +106,9 @@ Skills applied
 - [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md): workflow-driven skill routing
 - [`skills/*/SKILL.md`](./skills): reusable review and implementation skills
 - [`templates/`](./templates): starter files for adoption
-- [`examples/huntr/`](./examples/huntr): example adaptation only, not part of the generic core
+- [`examples/security-workflow/`](./examples/security-workflow): security-focused workflow example overlay
+- [`examples/backend-service/`](./examples/backend-service): backend API/service example overlay
+- [`examples/data-pipeline/`](./examples/data-pipeline): data pipeline example overlay
 
 ## GitHub Metadata Suggestions
 

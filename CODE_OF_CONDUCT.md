@@ -32,4 +32,4 @@ This code of conduct applies in project spaces, including issues, pull requests,
 
 ## Reporting
 
-If you experience or witness unacceptable behavior, you can report concerns by opening a private issue.
+If you experience or witness unacceptable behavior, please report it by opening an issue or using the repository discussions feature. If a private reporting channel is required, maintainers will provide one in the future.
