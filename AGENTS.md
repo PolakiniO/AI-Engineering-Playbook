@@ -48,6 +48,10 @@ Strict mode is mandatory by default for all skill-based code work.
 Requirements:
 
 - Responses must follow the output structure defined by the selected skill.
+- Standard structured output is the default for normal reviews, PR comments, issues, and general repository work.
+- Presentation-optimized output is optional for screenshots, demos, public examples, or terminal readability.
+- Presentation may change formatting only. It must not change meaning, completeness, or section order.
+- Syntax highlighting or visually enhanced formatting is allowed only when it improves readability and consistency.
 - No required section may be omitted.
 - If a section has no content, write `None`.
 - Reviews must be critical by default, not permissive by default.
@@ -64,11 +68,14 @@ Every skill-based implementation or review response must include:
 - `Summary`
 - `Key Findings`
 - `Risks`
+- `Affected Files`
 - `Suggested Improvements`
 - `Suggested Tests`
 - `Skills applied`
 
 When the selected skill requires extra sections, include them as well.
+
+Plain output is preferred for routine work. Presentation-optimized output is useful for demo screenshots and public examples.
 
 ## Automatic Skill Routing Rules
 

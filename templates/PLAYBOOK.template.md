@@ -37,6 +37,9 @@
 ## Strict Mode
 
 - use required output structure
+- use standard structured output by default
+- allow presentation-optimized output for screenshots, demos, or public examples when readability improves
+- preserve the same sections, ordering, and substance across both styles
 - include risk and improvement
 - include `Skills applied`
 

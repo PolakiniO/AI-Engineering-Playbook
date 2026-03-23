@@ -20,11 +20,17 @@ Strict mode is mandatory for implementation guidance, refactors, bug investigati
 Required response behavior:
 
 - use the selected skill output structure
+- use standard structured output by default
+- presentation-optimized output is optional for screenshots, demos, public examples, or terminal readability
+- presentation may improve readability, but it must preserve the same required sections, ordering, and substance
+- syntax highlighting is allowed only when it helps readability and consistency
 - include at least one risk
 - include at least one improvement
 - include `Skills applied`
 - avoid empty permissive summaries
 - write `None` explicitly when a required section has no content
+
+Plain output is preferred for routine work. Presentation-optimized output is useful for demo screenshots and public examples.
 
 ## Skill Selection Matrix
 
