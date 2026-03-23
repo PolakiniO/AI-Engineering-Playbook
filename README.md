@@ -1,10 +1,10 @@
 # AI-Engineering-Playbook
 
-![Open Source](https://img.shields.io/badge/open%20source-yes-black)
-[![MIT License](https://img.shields.io/badge/MIT-license-black)](./LICENSE)
-![AI Agents](https://img.shields.io/badge/AI-agents-black)
-![Code Review](https://img.shields.io/badge/code-review-black)
-![Developer Tools](https://img.shields.io/badge/developer-tools-black)
+![Open Source](https://img.shields.io/badge/open%20source-yes-2ea44f)
+[![MIT License](https://img.shields.io/badge/MIT-license-2563eb)](./LICENSE)
+![AI Agents](https://img.shields.io/badge/AI-agents-7c3aed)
+![Code Review](https://img.shields.io/badge/code-review-f59e0b)
+![Developer Tools](https://img.shields.io/badge/developer-tools-ef4444)
 
 AI can write code.  
 
