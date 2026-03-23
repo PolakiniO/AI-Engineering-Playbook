@@ -161,6 +161,7 @@ Skills applied
 ## Repository Layout
 
 - [`AGENTS.md`](./AGENTS.md): governance rules for coding agents  
+- [`PLAYBOOK.md`](./PLAYBOOK.md): root-level pointer to the canonical playbook  
 - [`skills/README.md`](./skills/README.md): skill system overview  
 - [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md): workflow-driven skill routing  
 - [`skills/*/SKILL.md`](./skills): reusable skills  
