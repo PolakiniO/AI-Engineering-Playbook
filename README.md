@@ -2,9 +2,7 @@
 
 Make AI coding agents behave like senior engineers.
 
-AI agents can write code. The hard part is getting reliable engineering behavior: structured reviews, explicit risks, clear boundaries, and consistent output. This framework gives Codex and similar AI coding agents a reusable governance layer for real repository work.
-
-This is a framework and playbook, not a tool. You copy it into a repo to improve how agents implement features, review PRs, investigate bugs, and reason about architecture.
+AI-Engineering-Playbook is a governance framework for Codex and similar AI coding agents. It is designed around Codex-first workflows today, while keeping the core portable, reusable, and ready for future agent-specific overlays. The goal is simple: make AI-assisted implementation, refactoring, and review behave more like disciplined senior engineering.
 
 ## What This Repository Provides
 
