@@ -1,8 +1,5 @@
 # AI-Engineering-Playbook
 
-AI can write code.  
-This makes it behave like an engineer.
-
 AI-Engineering-Playbook is a governance framework for Codex and similar AI coding agents.
 
 It makes AI-assisted implementation, refactoring, and review behave more like disciplined senior engineering - structured, consistent, and risk-aware.
@@ -12,6 +9,10 @@ It is not a tool you run. It is a layer you add.
 ---
 
 ## Demo
+
+AI can write code.  
+
+This makes it behave like an engineer.
 
 This is an example of a structured, senior-level AI code review generated using the framework.
 
@@ -162,13 +163,6 @@ Skills applied
 - [`examples/backend-service/`](./examples/backend-service): backend service overlay  
 - [`examples/data-pipeline/`](./examples/data-pipeline): data pipeline overlay  
 
----
-
-## GitHub Metadata Suggestions
-
-- Description: Reusable AI engineering governance framework for AI coding agents  
-- Tagline: Make AI coding agents behave like senior engineers  
-- Topics: `ai`, `codex`, `llm`, `code-review`, `governance`, `developer-tools`, `prompt-engineering`, `ai-agents`  
 
 ---
 
