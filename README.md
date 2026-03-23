@@ -1,5 +1,11 @@
 # AI-Engineering-Playbook
 
+![Open Source](https://img.shields.io/badge/open%20source-yes-black)
+[![MIT License](https://img.shields.io/badge/MIT-license-black)](./LICENSE)
+![AI Agents](https://img.shields.io/badge/AI-agents-black)
+![Code Review](https://img.shields.io/badge/code-review-black)
+![Developer Tools](https://img.shields.io/badge/developer-tools-black)
+
 AI can write code.  
 
 This makes it behave like an engineer.
