@@ -34,6 +34,31 @@ Required workflow:
 - Add secondary skills according to [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md).
 - Skill usage is mandatory for code-related work. It is not prompt-dependent.
 
+## Optional Slash-Command Skill Routing
+
+To support portable shorthand triggers (for example `/codex-install`) across repositories, define explicit slash-command aliases in `AGENTS.md`.
+
+Recommended pattern:
+
+- reserve slash commands for development-time governance actions, not runtime product behavior
+- map each slash command to one concrete skill name
+- document expected inputs and outputs inline so behavior is reproducible in other repositories
+
+Example alias:
+
+- `/codex-install` -> use `skill-installer` to install a Codex skill from the curated catalog or a GitHub repository path
+
+Behavior clarification:
+
+- adding this alias does not automatically copy files into other repositories by itself
+- the alias only routes the current turn to `skill-installer`; that installer performs the actual install action
+- to make this portable, install from a stable public source (for example, a GitHub repo path) that any target repository can access
+
+Implementation note for adopters:
+
+- include a trigger rule such as: "If the user invokes `/codex-install`, apply `skill-installer` for this turn."
+- keep this alias block in the repository root `AGENTS.md` so it copies cleanly to other repositories
+
 Operating constraints:
 
 - Skills are governance artifacts, not product features.

@@ -34,6 +34,8 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 
 ## Skill Selection Matrix
 
+- `playbook-installer`
+  - primary for repository onboarding, initial framework adoption, and governance-file migration planning
 - `architecture-guardian`
   - primary for layering, ownership, module boundaries, service boundaries, or repository structure changes
 - `scope-safety-guard`

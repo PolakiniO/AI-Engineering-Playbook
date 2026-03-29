@@ -16,6 +16,17 @@
 - Add secondary skills according to `skills/PLAYBOOK.md`.
 - Skill usage is mandatory for code-related work.
 
+## Optional Slash-Command Skill Routing
+
+- Define portable slash aliases for common governance workflows (example: `/codex-install`).
+- Map each alias to exactly one skill and expected behavior.
+- Keep aliases repository-level so they can be copied to other repos without runtime coupling.
+- Example mapping:
+  - `/codex-install` -> `skill-installer` (install skill from curated list or GitHub path)
+- Clarify behavior:
+  - slash alias selects a skill for the current turn
+  - installation/copying is performed by the installer workflow, not by the alias itself
+
 ## Strict-Mode Review Behavior
 
 - Follow the selected skill output structure.

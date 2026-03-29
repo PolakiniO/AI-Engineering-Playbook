@@ -91,6 +91,32 @@ This framework enforces structure, discipline, and review quality without coupli
 6. Run one test review using `AGENTS.md` and `skills/PLAYBOOK.md`  
 7. Refine only after observing real behavior on a PR or refactor  
 
+### Optional: Add Portable Slash Commands
+
+If you want shorthand commands such as `/codex-install`, define them in your repository `AGENTS.md` as explicit skill-routing aliases.
+
+Example:
+
+- `/codex-install` -> `skill-installer` (install a skill from curated options or from a GitHub repository path)
+
+Keep slash aliases governance-only (agent workflow behavior), not runtime product behavior.
+
+Important behavior note:
+
+- Defining `/codex-install` in `AGENTS.md` does **not** by itself copy files into other repositories.
+- It only tells Codex which skill to use for that turn.
+- The actual cross-repo install happens when `skill-installer` pulls from a portable source (such as a public GitHub repository path).
+
+### Optional: Publishable Skill Pattern
+
+Yes, you can make this public-skill friendly.
+
+This repository now includes a reusable onboarding skill:
+
+- [`playbook-installer`](./skills/playbook-installer/SKILL.md)
+
+From any other repository, install it with the built-in `skill-installer` skill by pointing to this public GitHub path (owner/repo/path form), then restart Codex so the new skill is loaded.
+
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
 ---
