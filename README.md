@@ -129,6 +129,66 @@ From any other repository, install the generated Codex artifact with the built-i
 
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
+### Install And Use In Codex
+
+The main workflow for this repository is:
+
+1. install `playbook-installer` into Codex
+2. open the target repository in Codex
+3. invoke the skill with `$playbook-installer`
+4. let it onboard that repository to this playbook
+
+#### Install the skill
+
+If you are working from a local checkout of this repository:
+
+```bash
+python3 scripts/export-codex-skills.py
+bash scripts/setup-codex-skill.sh
+```
+
+If you are installing from another repository or machine, use the built-in installer directly:
+
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo PolakiniO/AI-Engineering-Playbook \
+  --path dist/codex-skills/playbook-installer
+```
+
+If the skill is already installed and you want to replace it with the latest exported copy:
+
+```bash
+bash scripts/setup-codex-skill.sh --force
+```
+
+#### Restart Codex
+
+Newly installed skills are loaded on startup, so restart Codex after installation.
+
+#### Find the skill in Codex
+
+After restart:
+
+- use `/skills` to view or enable installed skills
+- do not expect custom skills to appear in the `/` slash-command palette
+- look for `Playbook Installer` in the skills list
+
+#### Invoke the skill
+
+Invoke the skill explicitly in a prompt with `$playbook-installer`.
+
+Example:
+
+```text
+Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook.
+```
+
+You can also be more specific:
+
+```text
+Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook, preserve existing repository-specific rules, and create a safe migration plan for AGENTS.md and skills/.
+```
+
 ### Troubleshooting: `skill-installer` Not Working
 
 If `skill-installer` appears to do nothing (for example after entering a partial input like `Implemen`), use this exact sequence.
@@ -201,12 +261,6 @@ If Codex still reports an invalid `SKILL.md` after reinstalling, check for stale
 #### 4) Restart Codex after successful install
 
 Newly installed skills are loaded on startup, so restart Codex before trying the skill.
-
-After restart:
-
-- use `/skills` to view or enable installed skills
-- do not expect custom skills to appear in the `/` slash-command palette
-- invoke a skill explicitly with `$skill-name`, for example `$playbook-installer`
 
 ---
 
