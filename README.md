@@ -91,9 +91,9 @@ This framework enforces structure, discipline, and review quality without coupli
 6. Run one test review using `AGENTS.md` and `skills/PLAYBOOK.md`  
 7. Refine only after observing real behavior on a PR or refactor  
 
-### Optional: Add Portable Slash Commands
+### Optional: Portable Slash Commands
 
-If you want shorthand commands such as `/codex-install`, define them in your repository `AGENTS.md` as explicit skill-routing aliases.
+Repositories can define shorthand commands such as `/codex-install` in `AGENTS.md` as explicit skill-routing aliases.
 
 Example:
 
@@ -101,15 +101,13 @@ Example:
 
 Keep slash aliases governance-only (agent workflow behavior), not runtime product behavior.
 
-Important behavior note:
+Behavior:
 
 - Defining `/codex-install` in `AGENTS.md` does **not** by itself copy files into other repositories.
 - It only tells Codex which skill to use for that turn.
 - The actual cross-repo install happens when `skill-installer` pulls from a portable source (such as a public GitHub repository path).
 
-### Optional: Publishable Skill Pattern
-
-Yes, you can make this public-skill friendly.
+### Publishable Skill Pattern
 
 This repository now includes a reusable onboarding skill:
 
@@ -125,31 +123,91 @@ python3 scripts/export-codex-skills.py
 
 That export produces both Codex-compatible `SKILL.md` files and `agents/openai.yaml` UI metadata so the installed skills are discoverable in Codex.
 
-From any other repository, install the generated Codex artifact with the built-in `skill-installer` skill by pointing to the exported GitHub path, then restart Codex so the new skill is loaded.
+Install the generated Codex artifact from another repository by pointing the built-in `skill-installer` to the exported GitHub path, then restart Codex.
 
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
-### Troubleshooting: `skill-installer` Not Working
+### Install And Use In Codex
 
-If `skill-installer` appears to do nothing (for example after entering a partial input like `Implemen`), use this exact sequence.
+Primary workflow:
 
-#### Quick path: use the setup script
+1. install `playbook-installer` into Codex
+2. open the target repository in Codex
+3. invoke the skill with `$playbook-installer`
+4. let it onboard that repository to this playbook
 
-This repository includes a wrapper script so you do not have to remember installer arguments:
+#### Install the skill
+
+From a local checkout of this repository:
 
 ```bash
+python3 scripts/export-codex-skills.py
 bash scripts/setup-codex-skill.sh
 ```
 
-If the generated path exists locally, the script installs directly from your local `dist/codex-skills/...` tree. If it does not exist locally, it falls back to this repository's `origin` remote, or `PolakiniO/AI-Engineering-Playbook` if no GitHub `origin` is configured.
+From another repository or machine:
 
-If you want to replace an already installed skill during local iteration, use:
+```bash
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo PolakiniO/AI-Engineering-Playbook \
+  --path dist/codex-skills/playbook-installer
+```
+
+To replace an existing installed copy:
 
 ```bash
 bash scripts/setup-codex-skill.sh --force
 ```
 
-You can override the source skill:
+#### Restart Codex
+
+Newly installed skills are loaded on startup, so restart Codex after installation.
+
+#### Find the skill in Codex
+
+After restart:
+
+- use `/skills` to view or enable installed skills
+- do not expect custom skills to appear in the `/` slash-command palette
+- look for `Playbook Installer` in the skills list
+
+#### Invoke the skill
+
+Invoke the skill explicitly in a prompt with `$playbook-installer`.
+
+Example:
+
+```text
+Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook.
+```
+
+More specific example:
+
+```text
+Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook, preserve existing repository-specific rules, and create a safe migration plan for AGENTS.md and skills/.
+```
+
+### Troubleshooting: `skill-installer`
+
+If `skill-installer` appears to do nothing (for example after entering a partial input like `Implemen`), use this exact sequence.
+
+#### Quick path
+
+This repository includes a wrapper script:
+
+```bash
+bash scripts/setup-codex-skill.sh
+```
+
+If the generated path exists locally, the script installs directly from your local `dist/codex-skills/...` tree. Otherwise it falls back to this repository's `origin` remote, or `PolakiniO/AI-Engineering-Playbook` if no GitHub `origin` is configured.
+
+To replace an already installed skill during local iteration:
+
+```bash
+bash scripts/setup-codex-skill.sh --force
+```
+
+Override the source skill:
 
 ```bash
 bash scripts/setup-codex-skill.sh \
@@ -169,7 +227,7 @@ The setup script auto-discovers the installer in common locations under `/opt/co
 python3 ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
 ```
 
-Then copy an exact skill name from the output (for example `figma-implement-design`).
+Copy an exact skill name from the output.
 
 #### 2) Install using an exact path (not a partial name)
 
@@ -196,17 +254,11 @@ python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-githu
 - **`not found`**  
   The skill name/path is incorrect. Re-run `list-skills.py` and retry with an exact name.
 
-If Codex still reports an invalid `SKILL.md` after reinstalling, check for stale backup folders under `~/.codex/skills/`. A folder like `playbook-installer.bak/` is still scanned as a skill. Move it outside `~/.codex/skills/` or delete it if you no longer need it.
+If Codex still reports an invalid `SKILL.md` after reinstalling, check for stale backup folders under `~/.codex/skills/`. A folder like `playbook-installer.bak/` is still scanned as a skill. Move it outside `~/.codex/skills/` or delete it if it is no longer needed.
 
 #### 4) Restart Codex after successful install
 
 Newly installed skills are loaded on startup, so restart Codex before trying the skill.
-
-After restart:
-
-- use `/skills` to view or enable installed skills
-- do not expect custom skills to appear in the `/` slash-command palette
-- invoke a skill explicitly with `$skill-name`, for example `$playbook-installer`
 
 ---
 
