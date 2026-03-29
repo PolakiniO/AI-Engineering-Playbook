@@ -119,6 +119,66 @@ From any other repository, install it with the built-in `skill-installer` skill 
 
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
+### Troubleshooting: `skill-installer` Not Working
+
+If `skill-installer` appears to do nothing (for example after entering a partial input like `Implemen`), use this exact sequence.
+
+#### Quick path: use the setup script
+
+This repository includes a wrapper script so you do not have to remember installer arguments:
+
+```bash
+bash scripts/setup-codex-skill.sh
+```
+
+By default it installs `playbook-installer` from `openai/skills`.
+
+You can override the source skill:
+
+```bash
+bash scripts/setup-codex-skill.sh \
+  --repo openai/skills \
+  --path skills/.curated/figma-implement-design \
+  --ref main
+```
+
+#### 1) List available skills first (copy exact names)
+
+```bash
+python3 /opt/codex/skills/.system/skill-installer/scripts/list-skills.py
+```
+
+Then copy an exact skill name from the output (for example `figma-implement-design`).
+
+#### 2) Install using an exact path (not a partial name)
+
+```bash
+python3 /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo openai/skills \
+  --path skills/.curated/<exact-skill-name>
+```
+
+Example:
+
+```bash
+python3 /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo openai/skills \
+  --path skills/.curated/figma-implement-design
+```
+
+#### 3) If install fails, diagnose by error text
+
+- **`403`, proxy, or tunnel error**  
+  Your environment cannot currently reach GitHub API/content endpoints. Retry from a network-enabled shell or configure proxy/token access.
+- **`already exists`**  
+  The destination skill folder already exists. Remove/rename the existing folder, or install a different skill.
+- **`not found`**  
+  The skill name/path is incorrect. Re-run `list-skills.py` and retry with an exact name.
+
+#### 4) Restart Codex after successful install
+
+Newly installed skills are loaded on startup, so restart Codex before trying the skill.
+
 ---
 
 ## Conceptual Flow
