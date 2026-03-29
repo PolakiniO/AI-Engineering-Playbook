@@ -1,3 +1,9 @@
+---
+name: scope-safety-guard
+description: Review or plan changes that affect permissions, security boundaries, sensitive operations, external effects, or safety constraints.
+metadata:
+  short-description: Enforce safety and external-effect boundaries
+---
 # scope-safety-guard
 
 ## Purpose During Development

@@ -1,3 +1,9 @@
+---
+name: architecture-guardian
+description: Review or plan changes that affect repository structure, layering, ownership, orchestration flow, or architectural boundaries.
+metadata:
+  short-description: Guard boundaries, ownership, and layering
+---
 # architecture-guardian
 
 ## Purpose During Development

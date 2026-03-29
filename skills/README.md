@@ -4,6 +4,10 @@ This directory contains reusable development-time reasoning skills for Codex and
 
 These files are not runtime code. They are governance artifacts that shape implementation and review behavior inside another repository.
 
+The files in this directory are the canonical vendor-neutral source format.
+
+If a specific tool needs extra packaging metadata, generate a derived distribution from this source rather than editing these files to match one tool's loader requirements.
+
 ## Rules
 
 - Always choose one primary skill for code-related work.

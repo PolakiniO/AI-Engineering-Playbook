@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playbook Installer"
+  short_description: "Onboard repositories to the playbook safely"
+  default_prompt: "Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook safely and incrementally."

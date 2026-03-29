@@ -1,3 +1,9 @@
+---
+name: artifact-contract-reviewer
+description: Review or plan changes that affect schemas, payloads, serialized artifacts, persisted records, event contracts, or downstream consumers.
+metadata:
+  short-description: Protect schema and interface contracts
+---
 # artifact-contract-reviewer
 
 ## Purpose During Development

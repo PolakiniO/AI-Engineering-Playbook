@@ -115,7 +115,17 @@ This repository now includes a reusable onboarding skill:
 
 - [`playbook-installer`](./skills/playbook-installer/SKILL.md)
 
-From any other repository, install it with the built-in `skill-installer` skill by pointing to this public GitHub path (owner/repo/path form), then restart Codex so the new skill is loaded.
+The canonical source under [`skills/`](./skills) stays vendor-neutral.
+
+Tool-specific packaging lives in generated distributions. For Codex, export artifacts into [`dist/codex-skills/`](./dist/codex-skills) with:
+
+```bash
+python3 scripts/export-codex-skills.py
+```
+
+That export produces both Codex-compatible `SKILL.md` files and `agents/openai.yaml` UI metadata so the installed skills are discoverable in Codex.
+
+From any other repository, install the generated Codex artifact with the built-in `skill-installer` skill by pointing to the exported GitHub path, then restart Codex so the new skill is loaded.
 
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
@@ -131,14 +141,20 @@ This repository includes a wrapper script so you do not have to remember install
 bash scripts/setup-codex-skill.sh
 ```
 
-By default it installs `playbook-installer` from `openai/skills`.
+If the generated path exists locally, the script installs directly from your local `dist/codex-skills/...` tree. If it does not exist locally, it falls back to this repository's `origin` remote, or `PolakiniO/AI-Engineering-Playbook` if no GitHub `origin` is configured.
+
+If you want to replace an already installed skill during local iteration, use:
+
+```bash
+bash scripts/setup-codex-skill.sh --force
+```
 
 You can override the source skill:
 
 ```bash
 bash scripts/setup-codex-skill.sh \
-  --repo openai/skills \
-  --path skills/.curated/figma-implement-design \
+  --repo PolakiniO/AI-Engineering-Playbook \
+  --path dist/codex-skills/playbook-installer \
   --ref main
 
 # Optional: if your Codex install lives in a custom location
@@ -150,7 +166,7 @@ The setup script auto-discovers the installer in common locations under `/opt/co
 #### 1) List available skills first (copy exact names)
 
 ```bash
-python3 /opt/codex/skills/.system/skill-installer/scripts/list-skills.py
+python3 ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
 ```
 
 Then copy an exact skill name from the output (for example `figma-implement-design`).
@@ -158,17 +174,17 @@ Then copy an exact skill name from the output (for example `figma-implement-desi
 #### 2) Install using an exact path (not a partial name)
 
 ```bash
-python3 /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo openai/skills \
-  --path skills/.curated/<exact-skill-name>
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo PolakiniO/AI-Engineering-Playbook \
+  --path dist/codex-skills/<exact-skill-name>
 ```
 
 Example:
 
 ```bash
-python3 /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo openai/skills \
-  --path skills/.curated/figma-implement-design
+python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo PolakiniO/AI-Engineering-Playbook \
+  --path dist/codex-skills/playbook-installer
 ```
 
 #### 3) If install fails, diagnose by error text
@@ -176,13 +192,21 @@ python3 /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-git
 - **`403`, proxy, or tunnel error**  
   Your environment cannot currently reach GitHub API/content endpoints. Retry from a network-enabled shell or configure proxy/token access.
 - **`already exists`**  
-  The destination skill folder already exists. Remove/rename the existing folder, or install a different skill.
+  The destination skill folder already exists. Remove/rename the existing folder, or re-run `bash scripts/setup-codex-skill.sh --force`.
 - **`not found`**  
   The skill name/path is incorrect. Re-run `list-skills.py` and retry with an exact name.
+
+If Codex still reports an invalid `SKILL.md` after reinstalling, check for stale backup folders under `~/.codex/skills/`. A folder like `playbook-installer.bak/` is still scanned as a skill. Move it outside `~/.codex/skills/` or delete it if you no longer need it.
 
 #### 4) Restart Codex after successful install
 
 Newly installed skills are loaded on startup, so restart Codex before trying the skill.
+
+After restart:
+
+- use `/skills` to view or enable installed skills
+- do not expect custom skills to appear in the `/` slash-command palette
+- invoke a skill explicitly with `$skill-name`, for example `$playbook-installer`
 
 ---
 

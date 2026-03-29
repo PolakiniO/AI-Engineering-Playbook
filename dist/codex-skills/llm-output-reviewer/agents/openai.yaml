@@ -1,0 +1,4 @@
+interface:
+  display_name: "LLM Output Reviewer"
+  short_description: "Review prompts and model-driven behavior"
+  default_prompt: "Use $llm-output-reviewer to review this change for prompt behavior, output validation, and fallback risks."

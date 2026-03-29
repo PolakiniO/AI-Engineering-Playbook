@@ -1,0 +1,4 @@
+interface:
+  display_name: "Performance Optimizer"
+  short_description: "Optimize performance-critical changes safely"
+  default_prompt: "Use $performance-optimizer to review this change for latency, throughput, caching, and duplicate-work issues."

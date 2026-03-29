@@ -35,6 +35,7 @@
 - Summary
 - Key Findings
 - Risks
+- Affected Files
 - [Optional repo-specific section]
 - Suggested Improvements
 - Suggested Tests

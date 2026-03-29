@@ -1,0 +1,4 @@
+interface:
+  display_name: "Artifact Contract Reviewer"
+  short_description: "Protect schema and interface contracts"
+  default_prompt: "Use $artifact-contract-reviewer to review this change for schema, payload, and downstream contract risk."
