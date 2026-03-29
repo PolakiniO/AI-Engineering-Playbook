@@ -123,6 +123,8 @@ Tool-specific packaging lives in generated distributions. For Codex, export arti
 python3 scripts/export-codex-skills.py
 ```
 
+That export produces both Codex-compatible `SKILL.md` files and `agents/openai.yaml` UI metadata so the installed skills are discoverable in Codex.
+
 From any other repository, install the generated Codex artifact with the built-in `skill-installer` skill by pointing to the exported GitHub path, then restart Codex so the new skill is loaded.
 
 Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
@@ -194,6 +196,12 @@ If Codex still reports an invalid `SKILL.md` after reinstalling, check for stale
 #### 4) Restart Codex after successful install
 
 Newly installed skills are loaded on startup, so restart Codex before trying the skill.
+
+After restart:
+
+- use `/skills` to view or enable installed skills
+- do not expect custom skills to appear in the `/` slash-command palette
+- invoke a skill explicitly with `$skill-name`, for example `$playbook-installer`
 
 ---
 
