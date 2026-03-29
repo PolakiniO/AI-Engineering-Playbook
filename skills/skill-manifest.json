@@ -1,0 +1,44 @@
+{
+  "architecture-guardian": {
+    "description": "Review or plan changes that affect repository structure, layering, ownership, orchestration flow, or architectural boundaries.",
+    "short_description": "Guard boundaries, ownership, and layering",
+    "display_name": "Architecture Guardian",
+    "default_prompt": "Use $architecture-guardian to review this change for boundary drift, ownership issues, and layering problems."
+  },
+  "artifact-contract-reviewer": {
+    "description": "Review or plan changes that affect schemas, payloads, serialized artifacts, persisted records, event contracts, or downstream consumers.",
+    "short_description": "Protect schema and interface contracts",
+    "display_name": "Artifact Contract Reviewer",
+    "default_prompt": "Use $artifact-contract-reviewer to review this change for schema, payload, and downstream contract risk."
+  },
+  "llm-output-reviewer": {
+    "description": "Review or plan changes that affect prompts, model output validation, fallback behavior, or LLM-driven decisions.",
+    "short_description": "Review prompts and model-driven behavior",
+    "display_name": "LLM Output Reviewer",
+    "default_prompt": "Use $llm-output-reviewer to review this change for prompt behavior, output validation, and fallback risks."
+  },
+  "performance-optimizer": {
+    "description": "Review or plan changes that affect latency, throughput, caching, batching, scaling behavior, or duplicate work.",
+    "short_description": "Optimize performance-critical changes safely",
+    "display_name": "Performance Optimizer",
+    "default_prompt": "Use $performance-optimizer to review this change for latency, throughput, caching, and duplicate-work issues."
+  },
+  "playbook-installer": {
+    "description": "Guide adoption of AI-Engineering-Playbook governance files in a portable, repeatable way across repositories.",
+    "short_description": "Onboard repositories to the playbook safely",
+    "display_name": "Playbook Installer",
+    "default_prompt": "Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook safely and incrementally."
+  },
+  "scope-safety-guard": {
+    "description": "Review or plan changes that affect permissions, security boundaries, sensitive operations, external effects, or safety constraints.",
+    "short_description": "Enforce safety and external-effect boundaries",
+    "display_name": "Scope Safety Guard",
+    "default_prompt": "Use $scope-safety-guard to review this change for permission, side-effect, and safety-boundary risks."
+  },
+  "test-strategy-reviewer": {
+    "description": "Assess verification scope, regression protection, and risk-based test coverage for changes under review or implementation.",
+    "short_description": "Define the minimum safe verification bar",
+    "display_name": "Test Strategy Reviewer",
+    "default_prompt": "Use $test-strategy-reviewer to define the minimum safe test plan and regression coverage for this change."
+  }
+}

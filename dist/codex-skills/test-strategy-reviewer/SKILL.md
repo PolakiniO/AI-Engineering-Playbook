@@ -1,3 +1,9 @@
+---
+name: test-strategy-reviewer
+description: Assess verification scope, regression protection, and risk-based test coverage for changes under review or implementation.
+metadata:
+  short-description: Define the minimum safe verification bar
+---
 # test-strategy-reviewer
 
 ## Purpose During Development

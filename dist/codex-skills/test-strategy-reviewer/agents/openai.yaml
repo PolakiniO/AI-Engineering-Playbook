@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Strategy Reviewer"
+  short_description: "Define the minimum safe verification bar"
+  default_prompt: "Use $test-strategy-reviewer to define the minimum safe test plan and regression coverage for this change."

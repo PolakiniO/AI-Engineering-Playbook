@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Guardian"
+  short_description: "Guard boundaries, ownership, and layering"
+  default_prompt: "Use $architecture-guardian to review this change for boundary drift, ownership issues, and layering problems."

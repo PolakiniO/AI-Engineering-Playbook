@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scope Safety Guard"
+  short_description: "Enforce safety and external-effect boundaries"
+  default_prompt: "Use $scope-safety-guard to review this change for permission, side-effect, and safety-boundary risks."
