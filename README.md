@@ -123,6 +123,25 @@ Versioning note: this framework is versionless by design, but you can pin a snap
 
 If `skill-installer` appears to do nothing (for example after entering a partial input like `Implemen`), use this exact sequence.
 
+#### Quick path: use the setup script
+
+This repository includes a wrapper script so you do not have to remember installer arguments:
+
+```bash
+bash scripts/setup-codex-skill.sh
+```
+
+By default it installs `playbook-installer` from `openai/skills`.
+
+You can override the source skill:
+
+```bash
+bash scripts/setup-codex-skill.sh \
+  --repo openai/skills \
+  --path skills/.curated/figma-implement-design \
+  --ref main
+```
+
 #### 1) List available skills first (copy exact names)
 
 ```bash
