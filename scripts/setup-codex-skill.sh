@@ -12,26 +12,27 @@ CODEX_HOME_DEFAULT="${CODEX_HOME:-$HOME/.codex}"
 force_reinstall=false
 
 resolve_installer_script() {
-  local candidates=()
-  local codex_home="${CODEX_HOME:-}"
-
   if [[ -n "${INSTALLER_SCRIPT:-}" ]]; then
-    candidates+=("$INSTALLER_SCRIPT")
+    if [[ -f "$INSTALLER_SCRIPT" ]]; then
+      echo "$INSTALLER_SCRIPT"
+      return 0
+    fi
+
+    echo "Error: installer script not found at: $INSTALLER_SCRIPT" >&2
+    return 1
   fi
 
-  if [[ -n "$codex_home" ]]; then
-    candidates+=("$codex_home/skills/.system/skill-installer/scripts/install-skill-from-github.py")
-  fi
-
-  candidates+=(
-    "$HOME/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py"
+  local codex_home="${CODEX_HOME:-$HOME/.codex}"
+  local candidates=(
     "/opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py"
+    "/opt/codex/skills/skill-installer/scripts/install-skill-from-github.py"
+    "$codex_home/skills/.system/skill-installer/scripts/install-skill-from-github.py"
+    "$codex_home/skills/skill-installer/scripts/install-skill-from-github.py"
   )
-
   local candidate
   for candidate in "${candidates[@]}"; do
     if [[ -f "$candidate" ]]; then
-      printf '%s\n' "$candidate"
+      echo "$candidate"
       return 0
     fi
   done
@@ -122,12 +123,14 @@ Options:
 Environment overrides:
   INSTALLER_SCRIPT          Exact path to install-skill-from-github.py
                             If unset, the script checks:
-                            1. $CODEX_HOME/skills/.system/skill-installer/scripts/...
-                            2. ~/.codex/skills/.system/skill-installer/scripts/...
-                            3. /opt/codex/skills/.system/skill-installer/scripts/...
+                            1. /opt/codex/skills/.system/skill-installer/scripts/...
+                            2. /opt/codex/skills/skill-installer/scripts/...
+                            3. $CODEX_HOME/skills/.system/skill-installer/scripts/...
+                            4. $CODEX_HOME/skills/skill-installer/scripts/...
   DEFAULT_REPO              Default repo value
   DEFAULT_SKILL_PATH        Default skill path value
   DEFAULT_REF               Default git ref value
+  CODEX_HOME                Used for fallback installer discovery (default: ~/.codex)
 EOF
 }
 
@@ -171,26 +174,18 @@ if [[ -z "$repo" || -z "$skill_path" || -z "$ref" ]]; then
   exit 1
 fi
 
-if ! INSTALLER_SCRIPT="$(resolve_installer_script)"; then
-  echo "Error: installer script not found." >&2
-  echo "Checked these locations:" >&2
-  if [[ -n "${INSTALLER_SCRIPT:-}" ]]; then
-    echo "  - $INSTALLER_SCRIPT" >&2
-  fi
-  if [[ -n "${CODEX_HOME:-}" ]]; then
-    echo "  - $CODEX_HOME/skills/.system/skill-installer/scripts/install-skill-from-github.py" >&2
-  fi
-  echo "  - $HOME/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py" >&2
-  echo "  - /opt/codex/skills/.system/skill-installer/scripts/install-skill-from-github.py" >&2
-  echo "Make sure Codex system skills are installed and the path is correct." >&2
+if ! installer_script="$(resolve_installer_script)"; then
+  echo "Error: installer script could not be discovered." >&2
+  echo "Checked default locations under /opt/codex/skills and \$CODEX_HOME/skills." >&2
+  echo "Set INSTALLER_SCRIPT to the exact path if your environment is customized." >&2
   exit 1
 fi
 
 echo "Installing Codex skill..."
-echo "  installer: $INSTALLER_SCRIPT"
 echo "  repo: $repo"
 echo "  path: $skill_path"
 echo "  ref:  $ref"
+echo "  installer: $installer_script"
 
 local_skill_path="$REPO_ROOT/$skill_path"
 dest_root="$CODEX_HOME_DEFAULT/skills"
@@ -205,7 +200,7 @@ else
   if [[ -e "$dest_dir" && "$force_reinstall" == "true" ]]; then
     rm -rf "$dest_dir"
   fi
-  python3 "$INSTALLER_SCRIPT" --repo "$repo" --path "$skill_path" --ref "$ref"
+  python3 "$installer_script" --repo "$repo" --path "$skill_path" --ref "$ref"
 fi
 
 echo

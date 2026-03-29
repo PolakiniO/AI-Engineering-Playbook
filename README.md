@@ -156,7 +156,12 @@ bash scripts/setup-codex-skill.sh \
   --repo PolakiniO/AI-Engineering-Playbook \
   --path dist/codex-skills/playbook-installer \
   --ref main
+
+# Optional: if your Codex install lives in a custom location
+INSTALLER_SCRIPT="/custom/path/install-skill-from-github.py" bash scripts/setup-codex-skill.sh
 ```
+
+The setup script auto-discovers the installer in common locations under `/opt/codex/skills` and `$CODEX_HOME/skills` before falling back to `INSTALLER_SCRIPT`.
 
 #### 1) List available skills first (copy exact names)
 
