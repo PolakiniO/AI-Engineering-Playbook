@@ -16,6 +16,12 @@
 - Add secondary skills according to `skills/PLAYBOOK.md`.
 - Skill usage is mandatory for code-related work.
 
+## Skill Invocation Compatibility Note
+
+- Do not define custom `/` commands in `AGENTS.md`; Codex slash commands are built-in product commands.
+- For portable workflows, invoke skills by name (example: `$skill-installer`) or direct plain-language instruction.
+- Clarify that installation/copying is performed by the installer workflow, not by invocation text alone.
+
 ## Strict-Mode Review Behavior
 
 - Follow the selected skill output structure.

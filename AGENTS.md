@@ -34,6 +34,16 @@ Required workflow:
 - Add secondary skills according to [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md).
 - Skill usage is mandatory for code-related work. It is not prompt-dependent.
 
+## Skill Invocation Compatibility Note
+
+Codex slash commands (for example `/model`) are built-in product commands. They are not user-definable through repository `AGENTS.md`.
+
+For portable skill usage across repositories:
+
+- invoke skills by name (`$skill-installer`) or explicit plain-language requests
+- keep invocation examples in docs and templates so users can repeat the same workflow in other repos
+- treat skill installation as an installer action (`skill-installer`), not an alias declaration
+
 Operating constraints:
 
 - Skills are governance artifacts, not product features.

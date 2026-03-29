@@ -16,6 +16,7 @@ These files are not runtime code. They are governance artifacts that shape imple
 ## Included Reusable Skills
 
 - [`architecture-guardian`](./architecture-guardian/SKILL.md)
+- [`playbook-installer`](./playbook-installer/SKILL.md)
 - [`scope-safety-guard`](./scope-safety-guard/SKILL.md)
 - [`performance-optimizer`](./performance-optimizer/SKILL.md)
 - [`artifact-contract-reviewer`](./artifact-contract-reviewer/SKILL.md)
