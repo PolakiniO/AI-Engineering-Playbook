@@ -1,4 +1,4 @@
-![AI Engineering Playbook Logo](./sources/IMG_9939.png)
+![AI Engineering Playbook Logo](./sources/415233F5-4EEF-43A3-B4D8-B57A7180477E.png)
 
 
 # AI-Engineering-Playbook
