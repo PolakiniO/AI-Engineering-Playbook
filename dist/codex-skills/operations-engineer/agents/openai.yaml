@@ -1,0 +1,4 @@
+interface:
+  display_name: "Operations Engineer"
+  short_description: "Prepare projects for basic operations"
+  default_prompt: "Use $operations-engineer to review this project for observability, recovery, runbooks, support burden, and launch readiness."

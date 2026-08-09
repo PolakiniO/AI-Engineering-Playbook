@@ -1,0 +1,4 @@
+interface:
+  display_name: "Security Engineer"
+  short_description: "Review security and tool reuse decisions"
+  default_prompt: "Use $security-engineer to review this plan or tool choice for security, permissions, secrets, supply-chain risk, and required scans."

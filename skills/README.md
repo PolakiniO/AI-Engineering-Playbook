@@ -20,6 +20,12 @@ If a specific tool needs extra packaging metadata, generate a derived distributi
 ## Included Reusable Skills
 
 - [`architecture-guardian`](./architecture-guardian/SKILL.md)
+- [`project-engineer`](./project-engineer/SKILL.md)
+- [`product-designer`](./product-designer/SKILL.md)
+- [`deployment-engineer`](./deployment-engineer/SKILL.md)
+- [`security-engineer`](./security-engineer/SKILL.md)
+- [`operations-engineer`](./operations-engineer/SKILL.md)
+- [`finance-engineer`](./finance-engineer/SKILL.md)
 - [`playbook-installer`](./playbook-installer/SKILL.md)
 - [`scope-safety-guard`](./scope-safety-guard/SKILL.md)
 - [`performance-optimizer`](./performance-optimizer/SKILL.md)

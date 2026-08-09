@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Engineer"
+  short_description: "Turn ideas into feasible project plans"
+  default_prompt: "Use $project-engineer to turn this idea or design into the simplest feasible project with design, deployment, security, operations, and cost guidance."

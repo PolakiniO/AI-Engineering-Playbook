@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deployment Engineer"
+  short_description: "Plan simple, safe deployment paths"
+  default_prompt: "Use $deployment-engineer to plan the simplest feasible deployment path, including environments, release steps, rollback, and verification."

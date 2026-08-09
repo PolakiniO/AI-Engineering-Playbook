@@ -5,17 +5,35 @@
     "display_name": "Architecture Guardian",
     "default_prompt": "Use $architecture-guardian to review this change for boundary drift, ownership issues, and layering problems."
   },
+  "deployment-engineer": {
+    "description": "Plan, implement, review, or troubleshoot deployment paths, hosting, CI/CD, release, rollback, environment, and production-readiness decisions for projects.",
+    "short_description": "Plan simple, safe deployment paths",
+    "display_name": "Deployment Engineer",
+    "default_prompt": "Use $deployment-engineer to plan the simplest feasible deployment path, including environments, release steps, rollback, and verification."
+  },
   "artifact-contract-reviewer": {
     "description": "Review or plan changes that affect schemas, payloads, serialized artifacts, persisted records, event contracts, or downstream consumers.",
     "short_description": "Protect schema and interface contracts",
     "display_name": "Artifact Contract Reviewer",
     "default_prompt": "Use $artifact-contract-reviewer to review this change for schema, payload, and downstream contract risk."
   },
+  "finance-engineer": {
+    "description": "Plan, review, or reduce project, cloud, SaaS, API, deployment, and operations costs using FinOps guidance while preserving security and maintainability.",
+    "short_description": "Minimize feasible project and cloud costs",
+    "display_name": "Finance Engineer",
+    "default_prompt": "Use $finance-engineer to review this project for lowest feasible cost, budget controls, cleanup plans, and FinOps risk."
+  },
   "llm-output-reviewer": {
     "description": "Review or plan changes that affect prompts, model output validation, fallback behavior, or LLM-driven decisions.",
     "short_description": "Review prompts and model-driven behavior",
     "display_name": "LLM Output Reviewer",
     "default_prompt": "Use $llm-output-reviewer to review this change for prompt behavior, output validation, and fallback risks."
+  },
+  "operations-engineer": {
+    "description": "Plan, implement, or review operational readiness, observability, reliability, recovery, runbooks, backups, support, and maintenance for projects.",
+    "short_description": "Prepare projects for basic operations",
+    "display_name": "Operations Engineer",
+    "default_prompt": "Use $operations-engineer to review this project for observability, recovery, runbooks, support burden, and launch readiness."
   },
   "performance-optimizer": {
     "description": "Review or plan changes that affect latency, throughput, caching, batching, scaling behavior, or duplicate work.",
@@ -28,6 +46,24 @@
     "short_description": "Onboard repositories to the playbook safely",
     "display_name": "Playbook Installer",
     "default_prompt": "Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook safely and incrementally."
+  },
+  "product-designer": {
+    "description": "Turn ideas, workflows, screenshots, or design briefs into credible product design direction and frontend guidance that avoids generic AI-looking UI.",
+    "short_description": "Design specific, polished product experiences",
+    "display_name": "Product Designer",
+    "default_prompt": "Use $product-designer to turn this idea or interface into a specific, polished, implementation-ready product design."
+  },
+  "project-engineer": {
+    "description": "Turn a design, idea, sketch, brief, or product concept into the simplest feasible project plan spanning design, deployment, security, operations, finance, tool reuse, and verification.",
+    "short_description": "Turn ideas into feasible project plans",
+    "display_name": "Project Engineer",
+    "default_prompt": "Use $project-engineer to turn this idea or design into the simplest feasible project with design, deployment, security, operations, and cost guidance."
+  },
+  "security-engineer": {
+    "description": "Plan or review project security, tool reuse, dependencies, services, integrations, permissions, secrets, supply-chain risk, and security scan requirements.",
+    "short_description": "Review security and tool reuse decisions",
+    "display_name": "Security Engineer",
+    "default_prompt": "Use $security-engineer to review this plan or tool choice for security, permissions, secrets, supply-chain risk, and required scans."
   },
   "scope-safety-guard": {
     "description": "Review or plan changes that affect permissions, security boundaries, sensitive operations, external effects, or safety constraints.",

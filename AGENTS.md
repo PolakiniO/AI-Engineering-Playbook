@@ -105,6 +105,12 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 ## Automatic Skill Routing Rules
 
 - Use `architecture-guardian` when a change affects boundaries, ownership, layering, or repository structure.
+- Use `project-engineer` when turning a design, idea, sketch, brief, or prototype into a feasible project plan.
+- Use `product-designer` when a change or request affects UI, UX, visual direction, product design quality, or generic-looking interfaces.
+- Use `deployment-engineer` when work affects hosting, CI/CD, release, rollback, environments, or deployment readiness.
+- Use `security-engineer` when work affects tool reuse, dependencies, services, integrations, secrets, permissions, or security scan requirements.
+- Use `operations-engineer` when work affects observability, reliability, runbooks, backups, recovery, support, or production operations.
+- Use `finance-engineer` when work affects cloud, SaaS, API, infrastructure, deployment, or operations cost.
 - Use `scope-safety-guard` when a change affects security boundaries, permissions, external effects, or safety constraints.
 - Use `performance-optimizer` when a change affects latency, throughput, duplicate work, scaling behavior, or performance claims.
 - Use `artifact-contract-reviewer` when a change affects artifacts, schemas, interfaces, payloads, or downstream consumers.

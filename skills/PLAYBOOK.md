@@ -36,6 +36,18 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 
 - `playbook-installer`
   - primary for repository onboarding, initial framework adoption, and governance-file migration planning
+- `project-engineer`
+  - primary for turning an idea, design, sketch, brief, or prototype into the simplest feasible project plan
+- `product-designer`
+  - primary for product design, UX, frontend visual direction, design quality, and avoiding generic AI-looking interfaces
+- `deployment-engineer`
+  - primary for hosting, CI/CD, release, rollback, environments, and deployment readiness
+- `security-engineer`
+  - primary for security planning, tool reuse decisions, dependency/service review, secrets, permissions, and scan requirements
+- `operations-engineer`
+  - primary for observability, reliability, runbooks, backups, recovery, support, and operational readiness
+- `finance-engineer`
+  - primary for cost estimation, FinOps, budgets, usage controls, cleanup, and lowest-feasible-cost planning
 - `architecture-guardian`
   - primary for layering, ownership, module boundaries, service boundaries, or repository structure changes
 - `scope-safety-guard`
@@ -158,6 +170,36 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 - use evidence before proposing optimization
 - prefer removal of duplicate work before speculative micro-optimization
 - reject improvements that hide stale state, weaken safety, or obscure ownership
+
+## 6. Idea-To-Project Delivery
+
+### Skill Selection
+
+- Primary skill: `project-engineer`
+- Add `product-designer` when the request includes UI, UX, brand, screenshots, product experience, frontend implementation, or "make it look real" expectations.
+- Add `security-engineer` when adopting tools, dependencies, services, integrations, deployment platforms, auth, secrets, or network exposure.
+- Add `deployment-engineer` when the project needs local preview, staging, production, CI/CD, hosting, rollback, or environment guidance.
+- Add `operations-engineer` when the project needs monitoring, logging, support, runbooks, backups, recovery, or production readiness.
+- Add `finance-engineer` when cloud services, SaaS tools, AI APIs, usage-based pricing, paid seats, or cost minimization matter.
+- Add existing review skills when implementation changes architecture, safety, contracts, performance, LLM behavior, or test strategy.
+
+### Invocation Order
+
+1. `project-engineer`
+2. `product-designer` if product or frontend experience matters
+3. `security-engineer` before approving any new or reused third-party tool
+4. `deployment-engineer` before implementation hardens around hosting assumptions
+5. `operations-engineer` before launch, handoff, or production use
+6. `finance-engineer` before committing to paid or usage-based resources
+7. existing review skills from this playbook for implementation risk
+
+### Combination Rules
+
+- simplest feasible path wins unless it violates security, operability, or user needs
+- existing tools should be reused only after a security review confirms they are fit for purpose
+- deployment should be planned early enough to shape implementation, not patched on at the end
+- cost controls should be explicit for paid, usage-based, preview, staging, and demo resources
+- design quality is part of project delivery and should be checked before final implementation acceptance
 
 ## Standard Review Flow
 

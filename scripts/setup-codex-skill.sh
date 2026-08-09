@@ -10,6 +10,34 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CODEX_HOME_DEFAULT="${CODEX_HOME:-$HOME/.codex}"
 force_reinstall=false
+explicit_selection=false
+install_project_engineering=false
+install_all_skills=false
+list_skills=false
+declare -a skill_paths=()
+declare -a all_skill_names=(
+  "architecture-guardian"
+  "artifact-contract-reviewer"
+  "deployment-engineer"
+  "finance-engineer"
+  "llm-output-reviewer"
+  "operations-engineer"
+  "performance-optimizer"
+  "playbook-installer"
+  "product-designer"
+  "project-engineer"
+  "scope-safety-guard"
+  "security-engineer"
+  "test-strategy-reviewer"
+)
+declare -a project_engineering_skill_names=(
+  "project-engineer"
+  "product-designer"
+  "deployment-engineer"
+  "security-engineer"
+  "operations-engineer"
+  "finance-engineer"
+)
 
 resolve_installer_script() {
   if [[ -n "${INSTALLER_SCRIPT:-}" ]]; then
@@ -105,17 +133,104 @@ install_local_skill() {
   echo "Installed $skill_name to $dest_dir"
 }
 
+add_skill_path() {
+  local path="$1"
+  local existing
+
+  if [[ -z "$path" ]]; then
+    echo "Error: skill path must be non-empty." >&2
+    return 1
+  fi
+
+  for existing in "${skill_paths[@]}"; do
+    if [[ "$existing" == "$path" ]]; then
+      return 0
+    fi
+  done
+
+  skill_paths+=("$path")
+}
+
+add_skill_name() {
+  local skill_name="$1"
+
+  if [[ -z "$skill_name" ]]; then
+    echo "Error: skill name must be non-empty." >&2
+    return 1
+  fi
+
+  add_skill_path "dist/codex-skills/$skill_name"
+}
+
+print_available_skills() {
+  local skill_name
+
+  echo "Available generated Codex skills:"
+  for skill_name in "${all_skill_names[@]}"; do
+    echo "  $skill_name"
+  done
+}
+
+install_skill_path() {
+  local skill_path="$1"
+  local repo="$2"
+  local ref="$3"
+  local force="$4"
+  local local_skill_path
+  local dest_root
+  local skill_name
+  local dest_dir
+  local installer_script
+
+  local_skill_path="$REPO_ROOT/$skill_path"
+  dest_root="$CODEX_HOME_DEFAULT/skills"
+  skill_name="$(basename "$skill_path")"
+  dest_dir="$dest_root/$skill_name"
+
+  echo "Installing Codex skill..."
+  echo "  repo: $repo"
+  echo "  path: $skill_path"
+  echo "  ref:  $ref"
+
+  if [[ -d "$local_skill_path" ]]; then
+    echo "  source: local workspace"
+    install_local_skill "$local_skill_path" "$dest_root" "$force"
+    return
+  fi
+
+  if ! installer_script="$(resolve_installer_script)"; then
+    echo "Error: installer script could not be discovered." >&2
+    echo "Checked default locations under /opt/codex/skills and \$CODEX_HOME/skills." >&2
+    echo "Set INSTALLER_SCRIPT to the exact path if your environment is customized." >&2
+    exit 1
+  fi
+
+  echo "  installer: $installer_script"
+  echo "  source: github"
+  if [[ -e "$dest_dir" && "$force" == "true" ]]; then
+    rm -rf "$dest_dir"
+  fi
+  python3 "$installer_script" --repo "$repo" --path "$skill_path" --ref "$ref"
+}
+
 usage() {
   cat <<'EOF'
 Usage:
   scripts/setup-codex-skill.sh [options]
 
-Installs a Codex skill using the system `skill-installer` helper.
+Installs one or more generated Codex skills.
 
 Options:
   --repo <owner/repo>       GitHub repo containing the skill
                             (default: origin remote or PolakiniO/AI-Engineering-Playbook)
   --path <skills/path>      Skill path within the repo (default: dist/codex-skills/playbook-installer)
+                            Can be repeated to install multiple explicit paths.
+  --skill <skill-name>      Install one generated skill by name, such as project-engineer.
+                            Can be repeated to install multiple skills independently.
+  --all-project-engineering Install project-engineer, product-designer, deployment-engineer,
+                            security-engineer, operations-engineer, and finance-engineer.
+  --all-skills              Install every generated skill from this playbook.
+  --list-skills             Print installable generated skill names and exit.
   --ref <git-ref>           Git ref/branch/tag (default: main)
   --force, --reinstall      Replace an existing installed skill with the new copy
   -h, --help                Show this help message
@@ -135,7 +250,6 @@ EOF
 }
 
 repo="$(resolve_default_repo)"
-skill_path="$DEFAULT_SKILL_PATH"
 ref="$DEFAULT_REF"
 
 while [[ $# -gt 0 ]]; do
@@ -145,8 +259,28 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     --path)
-      skill_path="${2:-}"
+      add_skill_path "${2:-}"
+      explicit_selection=true
       shift 2
+      ;;
+    --skill)
+      add_skill_name "${2:-}"
+      explicit_selection=true
+      shift 2
+      ;;
+    --all-project-engineering)
+      install_project_engineering=true
+      explicit_selection=true
+      shift
+      ;;
+    --all-skills)
+      install_all_skills=true
+      explicit_selection=true
+      shift
+      ;;
+    --list-skills)
+      list_skills=true
+      shift
       ;;
     --ref)
       ref="${2:-}"
@@ -168,40 +302,41 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$repo" || -z "$skill_path" || -z "$ref" ]]; then
-  echo "Error: --repo, --path, and --ref must be non-empty." >&2
+if [[ "$list_skills" == "true" ]]; then
+  print_available_skills
+  exit 0
+fi
+
+if [[ "$install_all_skills" == "true" ]]; then
+  for skill_name in "${all_skill_names[@]}"; do
+    add_skill_name "$skill_name"
+  done
+fi
+
+if [[ "$install_project_engineering" == "true" ]]; then
+  for skill_name in "${project_engineering_skill_names[@]}"; do
+    add_skill_name "$skill_name"
+  done
+fi
+
+if [[ "$explicit_selection" == "false" ]]; then
+  add_skill_path "$DEFAULT_SKILL_PATH"
+fi
+
+if [[ -z "$repo" || -z "$ref" ]]; then
+  echo "Error: --repo and --ref must be non-empty." >&2
   usage
   exit 1
 fi
 
-if ! installer_script="$(resolve_installer_script)"; then
-  echo "Error: installer script could not be discovered." >&2
-  echo "Checked default locations under /opt/codex/skills and \$CODEX_HOME/skills." >&2
-  echo "Set INSTALLER_SCRIPT to the exact path if your environment is customized." >&2
+if [[ "${#skill_paths[@]}" -eq 0 ]]; then
+  echo "Error: no skills selected for installation." >&2
   exit 1
 fi
 
-echo "Installing Codex skill..."
-echo "  repo: $repo"
-echo "  path: $skill_path"
-echo "  ref:  $ref"
-echo "  installer: $installer_script"
-
-local_skill_path="$REPO_ROOT/$skill_path"
-dest_root="$CODEX_HOME_DEFAULT/skills"
-skill_name="$(basename "$skill_path")"
-dest_dir="$dest_root/$skill_name"
-
-if [[ -d "$local_skill_path" ]]; then
-  echo "  source: local workspace"
-  install_local_skill "$local_skill_path" "$dest_root" "$force_reinstall"
-else
-  echo "  source: github"
-  if [[ -e "$dest_dir" && "$force_reinstall" == "true" ]]; then
-    rm -rf "$dest_dir"
-  fi
-  python3 "$installer_script" --repo "$repo" --path "$skill_path" --ref "$ref"
-fi
+for skill_path in "${skill_paths[@]}"; do
+  install_skill_path "$skill_path" "$repo" "$ref" "$force_reinstall"
+done
 
 echo
-echo "Install complete. Restart Codex to pick up new skills."
+echo "Install complete. Restart Codex to pick up new or updated skills."

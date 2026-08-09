@@ -36,6 +36,7 @@ This is what a structured, senior-level AI code review should look like.
 - a reusable [`AGENTS.md`](./AGENTS.md) for repository-level governance  
 - a portable skill system under [`skills/`](./skills)  
 - a generic workflow playbook in [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md)  
+- an idea-to-project engineering skill family covering design, deployment, security, operations, and FinOps
 - templates in [`templates/`](./templates) for adapting the framework safely  
 - example overlays in:
   - [`examples/security-workflow/`](./examples/security-workflow)  
@@ -107,6 +108,15 @@ This repository now includes a reusable onboarding skill:
 
 - [`playbook-installer`](./skills/playbook-installer/SKILL.md)
 
+It also includes an idea-to-project engineering framework:
+
+- [`project-engineer`](./skills/project-engineer/SKILL.md): turns an idea, design, sketch, or brief into the simplest feasible project plan
+- [`product-designer`](./skills/product-designer/SKILL.md): turns concepts into credible, domain-specific product design direction
+- [`deployment-engineer`](./skills/deployment-engineer/SKILL.md): plans hosting, CI/CD, release, rollback, and environment strategy
+- [`security-engineer`](./skills/security-engineer/SKILL.md): reviews tool reuse, dependencies, permissions, secrets, and required scans
+- [`operations-engineer`](./skills/operations-engineer/SKILL.md): defines observability, recovery, runbooks, backups, and support readiness
+- [`finance-engineer`](./skills/finance-engineer/SKILL.md): keeps cloud, SaaS, API, deployment, and operations cost to the lowest feasible level
+
 The canonical source under [`skills/`](./skills) stays vendor-neutral.
 
 Tool-specific packaging lives in generated distributions. For Codex, export artifacts into [`dist/codex-skills/`](./dist/codex-skills) with:
@@ -130,6 +140,8 @@ Primary workflow:
 3. invoke the skill with `$playbook-installer`
 4. let it onboard that repository to this playbook
 
+For idea-to-project work, install the project engineering skill family as a group, or install only the role skills you need.
+
 #### Install the skill
 
 From a local checkout of this repository:
@@ -137,6 +149,37 @@ From a local checkout of this repository:
 ```bash
 python3 scripts/export-codex-skills.py
 bash scripts/setup-codex-skill.sh
+```
+
+The default command installs only `playbook-installer` for backward compatibility.
+
+Install the full project engineering family:
+
+```bash
+bash scripts/setup-codex-skill.sh --all-project-engineering
+```
+
+Install one generated skill independently:
+
+```bash
+bash scripts/setup-codex-skill.sh --skill project-engineer
+bash scripts/setup-codex-skill.sh --skill product-designer
+bash scripts/setup-codex-skill.sh --skill deployment-engineer
+bash scripts/setup-codex-skill.sh --skill security-engineer
+bash scripts/setup-codex-skill.sh --skill operations-engineer
+bash scripts/setup-codex-skill.sh --skill finance-engineer
+```
+
+List all installable generated skills:
+
+```bash
+bash scripts/setup-codex-skill.sh --list-skills
+```
+
+Install every generated skill from this playbook:
+
+```bash
+bash scripts/setup-codex-skill.sh --all-skills
 ```
 
 From another repository or machine:
@@ -151,6 +194,12 @@ To replace an existing installed copy:
 
 ```bash
 bash scripts/setup-codex-skill.sh --force
+```
+
+When installing multiple skills, use `--force` to replace any matching installed copies:
+
+```bash
+bash scripts/setup-codex-skill.sh --all-project-engineering --force
 ```
 
 #### Restart Codex
@@ -195,6 +244,18 @@ bash scripts/setup-codex-skill.sh
 
 If the generated path exists locally, the script installs directly from your local `dist/codex-skills/...` tree. Otherwise it falls back to this repository's `origin` remote, or `PolakiniO/AI-Engineering-Playbook` if no GitHub `origin` is configured.
 
+Install all project engineering skills:
+
+```bash
+bash scripts/setup-codex-skill.sh --all-project-engineering
+```
+
+Install a single playbook skill by name:
+
+```bash
+bash scripts/setup-codex-skill.sh --skill deployment-engineer
+```
+
 To replace an already installed skill during local iteration:
 
 ```bash
@@ -206,7 +267,7 @@ Override the source skill:
 ```bash
 bash scripts/setup-codex-skill.sh \
   --repo PolakiniO/AI-Engineering-Playbook \
-  --path dist/codex-skills/playbook-installer \
+  --skill playbook-installer \
   --ref main
 
 # Optional: if your Codex install lives in a custom location

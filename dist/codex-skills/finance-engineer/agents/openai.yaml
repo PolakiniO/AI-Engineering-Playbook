@@ -1,0 +1,4 @@
+interface:
+  display_name: "Finance Engineer"
+  short_description: "Minimize feasible project and cloud costs"
+  default_prompt: "Use $finance-engineer to review this project for lowest feasible cost, budget controls, cleanup plans, and FinOps risk."
