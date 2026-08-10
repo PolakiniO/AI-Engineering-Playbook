@@ -19,20 +19,20 @@ If a specific tool needs extra packaging metadata, generate a derived distributi
 
 ## Included Reusable Skills
 
-- [`architecture-guardian`](./architecture-guardian/SKILL.md)
-- [`codex-agent-orchestration`](./codex-agent-orchestration/SKILL.md)
-- [`project-engineer`](./project-engineer/SKILL.md)
-- [`product-designer`](./product-designer/SKILL.md)
-- [`deployment-engineer`](./deployment-engineer/SKILL.md)
-- [`security-engineer`](./security-engineer/SKILL.md)
-- [`operations-engineer`](./operations-engineer/SKILL.md)
-- [`finance-engineer`](./finance-engineer/SKILL.md)
-- [`playbook-installer`](./playbook-installer/SKILL.md)
-- [`scope-safety-guard`](./scope-safety-guard/SKILL.md)
-- [`performance-optimizer`](./performance-optimizer/SKILL.md)
-- [`artifact-contract-reviewer`](./artifact-contract-reviewer/SKILL.md)
-- [`llm-output-reviewer`](./llm-output-reviewer/SKILL.md)
-- [`test-strategy-reviewer`](./test-strategy-reviewer/SKILL.md)
+- [`architecture-guardian`](./architecture-guardian/SKILL.md) ([install/use](./architecture-guardian/README.md))
+- [`codex-agent-orchestration`](./codex-agent-orchestration/SKILL.md) ([install/use](./codex-agent-orchestration/README.md))
+- [`project-engineer`](./project-engineer/SKILL.md) ([install/use](./project-engineer/README.md))
+- [`product-designer`](./product-designer/SKILL.md) ([install/use](./product-designer/README.md))
+- [`deployment-engineer`](./deployment-engineer/SKILL.md) ([install/use](./deployment-engineer/README.md))
+- [`security-engineer`](./security-engineer/SKILL.md) ([install/use](./security-engineer/README.md))
+- [`operations-engineer`](./operations-engineer/SKILL.md) ([install/use](./operations-engineer/README.md))
+- [`finance-engineer`](./finance-engineer/SKILL.md) ([install/use](./finance-engineer/README.md))
+- [`playbook-installer`](./playbook-installer/SKILL.md) ([install/use](./playbook-installer/README.md))
+- [`scope-safety-guard`](./scope-safety-guard/SKILL.md) ([install/use](./scope-safety-guard/README.md))
+- [`performance-optimizer`](./performance-optimizer/SKILL.md) ([install/use](./performance-optimizer/README.md))
+- [`artifact-contract-reviewer`](./artifact-contract-reviewer/SKILL.md) ([install/use](./artifact-contract-reviewer/README.md))
+- [`llm-output-reviewer`](./llm-output-reviewer/SKILL.md) ([install/use](./llm-output-reviewer/README.md))
+- [`test-strategy-reviewer`](./test-strategy-reviewer/SKILL.md) ([install/use](./test-strategy-reviewer/README.md))
 
 ## Customization Guidance
 
