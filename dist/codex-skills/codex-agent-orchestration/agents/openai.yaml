@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Agent Orchestration"
+  short_description: "Orchestrate project Codex subagents"
+  default_prompt: "Use $codex-agent-orchestration to set up and run a project Codex subagent team."

@@ -17,6 +17,12 @@
     "display_name": "Artifact Contract Reviewer",
     "default_prompt": "Use $artifact-contract-reviewer to review this change for schema, payload, and downstream contract risk."
   },
+  "codex-agent-orchestration": {
+    "description": "Set up and run Codex custom subagent orchestration for software projects. Use when a user wants a project-local `.codex/agents/*.toml` team, an `AGENTS.md` orchestration contract, a software-factory workflow, parallel Codex subagents, or reusable agent chains such as architect to backend/frontend to tester/security/reviewer.",
+    "short_description": "Orchestrate project Codex subagents",
+    "display_name": "Codex Agent Orchestration",
+    "default_prompt": "Use $codex-agent-orchestration to set up and run a project Codex subagent team."
+  },
   "finance-engineer": {
     "description": "Plan, review, or reduce project, cloud, SaaS, API, deployment, and operations costs using FinOps guidance while preserving security and maintainability.",
     "short_description": "Minimize feasible project and cloud costs",

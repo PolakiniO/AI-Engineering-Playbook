@@ -80,6 +80,11 @@ def main() -> int:
             )
         )
 
+        for resource_name in ("scripts", "references", "assets"):
+            resource_dir = skill_dir / resource_name
+            if resource_dir.is_dir():
+                shutil.copytree(resource_dir, out_dir / resource_name)
+
     print(f"Exported Codex skill artifacts to {DIST_DIR}")
     return 0
 

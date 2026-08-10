@@ -107,6 +107,7 @@ Behavior:
 This repository now includes a reusable onboarding skill:
 
 - [`playbook-installer`](./skills/playbook-installer/SKILL.md)
+- [`codex-agent-orchestration`](./skills/codex-agent-orchestration/SKILL.md): sets up project-local Codex subagent teams and orchestration workflows
 
 It also includes an idea-to-project engineering framework:
 
@@ -157,6 +158,12 @@ Install the full project engineering family:
 
 ```bash
 bash scripts/setup-codex-skill.sh --all-project-engineering
+```
+
+Install only the Codex agent orchestration skill:
+
+```bash
+bash scripts/setup-codex-agent-orchestration-skill.sh
 ```
 
 Install one generated skill independently:
@@ -248,6 +255,12 @@ Install all project engineering skills:
 
 ```bash
 bash scripts/setup-codex-skill.sh --all-project-engineering
+```
+
+Install only the Codex agent orchestration skill:
+
+```bash
+bash scripts/setup-codex-agent-orchestration-skill.sh
 ```
 
 Install a single playbook skill by name:

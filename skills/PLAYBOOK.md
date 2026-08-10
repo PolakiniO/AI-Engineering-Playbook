@@ -36,6 +36,8 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 
 - `playbook-installer`
   - primary for repository onboarding, initial framework adoption, and governance-file migration planning
+- `codex-agent-orchestration`
+  - primary for project-local `.codex/agents/*.toml` teams, software-factory workflows, parallel Codex subagents, and reusable agent chains
 - `project-engineer`
   - primary for turning an idea, design, sketch, brief, or prototype into the simplest feasible project plan
 - `product-designer`
@@ -200,6 +202,22 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 - deployment should be planned early enough to shape implementation, not patched on at the end
 - cost controls should be explicit for paid, usage-based, preview, staging, and demo resources
 - design quality is part of project delivery and should be checked before final implementation acceptance
+
+## 7. Agent Orchestration
+
+### Skill Selection
+
+- Primary skill: `codex-agent-orchestration`
+- Add `architecture-guardian` when generated agents change repository instructions, ownership boundaries, or work delegation structure.
+- Add `scope-safety-guard` when orchestration could trigger external effects, deployment, credential access, permissions, or security-sensitive work.
+- Add `test-strategy-reviewer` when generated agent workflows need validation, regression protection, or dry-run coverage.
+
+### Combination Rules
+
+- generate project-local agents only after inspecting existing `AGENTS.md` and `.codex/` files
+- run the generator with `--dry-run` before overwriting hand-written orchestration files
+- keep the parent session responsible for approvals, commits, pushes, deployments, and final synthesis
+- never run write-capable subagents concurrently against overlapping file scopes
 
 ## Standard Review Flow
 

@@ -105,6 +105,7 @@ Plain output is preferred for routine work. Presentation-optimized output is use
 ## Automatic Skill Routing Rules
 
 - Use `architecture-guardian` when a change affects boundaries, ownership, layering, or repository structure.
+- Use `codex-agent-orchestration` when work needs project-local `.codex/agents/*.toml` teams, parallel Codex subagents, or reusable agent chains.
 - Use `project-engineer` when turning a design, idea, sketch, brief, or prototype into a feasible project plan.
 - Use `product-designer` when a change or request affects UI, UX, visual direction, product design quality, or generic-looking interfaces.
 - Use `deployment-engineer` when work affects hosting, CI/CD, release, rollback, environments, or deployment readiness.

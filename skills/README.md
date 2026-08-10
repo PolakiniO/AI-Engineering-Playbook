@@ -20,6 +20,7 @@ If a specific tool needs extra packaging metadata, generate a derived distributi
 ## Included Reusable Skills
 
 - [`architecture-guardian`](./architecture-guardian/SKILL.md)
+- [`codex-agent-orchestration`](./codex-agent-orchestration/SKILL.md)
 - [`project-engineer`](./project-engineer/SKILL.md)
 - [`product-designer`](./product-designer/SKILL.md)
 - [`deployment-engineer`](./deployment-engineer/SKILL.md)

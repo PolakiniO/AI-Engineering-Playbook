@@ -18,6 +18,7 @@ declare -a skill_paths=()
 declare -a all_skill_names=(
   "architecture-guardian"
   "artifact-contract-reviewer"
+  "codex-agent-orchestration"
   "deployment-engineer"
   "finance-engineer"
   "llm-output-reviewer"
@@ -230,6 +231,8 @@ Options:
   --all-project-engineering Install project-engineer, product-designer, deployment-engineer,
                             security-engineer, operations-engineer, and finance-engineer.
   --all-skills              Install every generated skill from this playbook.
+                            For only codex-agent-orchestration, use:
+                            scripts/setup-codex-agent-orchestration-skill.sh
   --list-skills             Print installable generated skill names and exit.
   --ref <git-ref>           Git ref/branch/tag (default: main)
   --force, --reinstall      Replace an existing installed skill with the new copy
