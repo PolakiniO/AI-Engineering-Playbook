@@ -102,21 +102,7 @@ Behavior:
 - It only tells Codex which skill to use for that turn.
 - The actual cross-repo install happens when `skill-installer` pulls from a portable source (such as a public GitHub repository path).
 
-### Publishable Skill Pattern
-
-This repository now includes a reusable onboarding skill:
-
-- [`playbook-installer`](./skills/playbook-installer/SKILL.md)
-- [`codex-agent-orchestration`](./skills/codex-agent-orchestration/SKILL.md): sets up project-local Codex subagent teams and orchestration workflows
-
-It also includes an idea-to-project engineering framework:
-
-- [`project-engineer`](./skills/project-engineer/SKILL.md): turns an idea, design, sketch, or brief into the simplest feasible project plan
-- [`product-designer`](./skills/product-designer/SKILL.md): turns concepts into credible, domain-specific product design direction
-- [`deployment-engineer`](./skills/deployment-engineer/SKILL.md): plans hosting, CI/CD, release, rollback, and environment strategy
-- [`security-engineer`](./skills/security-engineer/SKILL.md): reviews tool reuse, dependencies, permissions, secrets, and required scans
-- [`operations-engineer`](./skills/operations-engineer/SKILL.md): defines observability, recovery, runbooks, backups, and support readiness
-- [`finance-engineer`](./skills/finance-engineer/SKILL.md): keeps cloud, SaaS, API, deployment, and operations cost to the lowest feasible level
+### Skills Catalog
 
 The canonical source under [`skills/`](./skills) stays vendor-neutral.
 
@@ -126,104 +112,73 @@ Tool-specific packaging lives in generated distributions. For Codex, export arti
 python3 scripts/export-codex-skills.py
 ```
 
-That export produces both Codex-compatible `SKILL.md` files and `agents/openai.yaml` UI metadata so the installed skills are discoverable in Codex.
-
-Install the generated Codex artifact from another repository by pointing the built-in `skill-installer` to the exported GitHub path, then restart Codex.
-
-Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
-
-### Install And Use In Codex
-
-Primary workflow:
-
-1. install `playbook-installer` into Codex
-2. open the target repository in Codex
-3. invoke the skill with `$playbook-installer`
-4. let it onboard that repository to this playbook
-
-For idea-to-project work, install the project engineering skill family as a group, or install only the role skills you need.
-
-#### Install the skill
-
-From a local checkout of this repository:
+Install any single generated skill from a local checkout:
 
 ```bash
-python3 scripts/export-codex-skills.py
-bash scripts/setup-codex-skill.sh
+bash scripts/setup-codex-skill.sh --skill <skill-name>
 ```
 
-The default command installs only `playbook-installer` for backward compatibility.
+If the skill is already installed, add `--force` to replace the existing copy.
 
-Install the full project engineering family:
-
-```bash
-bash scripts/setup-codex-skill.sh --all-project-engineering
-```
-
-Install only the Codex agent orchestration skill:
-
-```bash
-bash scripts/setup-codex-agent-orchestration-skill.sh
-```
-
-Install one generated skill independently:
-
-```bash
-bash scripts/setup-codex-skill.sh --skill project-engineer
-bash scripts/setup-codex-skill.sh --skill product-designer
-bash scripts/setup-codex-skill.sh --skill deployment-engineer
-bash scripts/setup-codex-skill.sh --skill security-engineer
-bash scripts/setup-codex-skill.sh --skill operations-engineer
-bash scripts/setup-codex-skill.sh --skill finance-engineer
-```
-
-List all installable generated skills:
-
-```bash
-bash scripts/setup-codex-skill.sh --list-skills
-```
-
-Install every generated skill from this playbook:
-
-```bash
-bash scripts/setup-codex-skill.sh --all-skills
-```
-
-From another repository or machine:
+Install any single generated skill from GitHub:
 
 ```bash
 python3 ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo PolakiniO/AI-Engineering-Playbook \
-  --path dist/codex-skills/playbook-installer
+  --path dist/codex-skills/<skill-name>
 ```
 
-To replace an existing installed copy:
+Invoke an installed skill in Codex with `$skill-name`:
+
+```text
+Use $project-engineer to turn this idea into the simplest feasible project.
+```
+
+| Skill | Purpose | Local install | Codex use |
+| --- | --- | --- | --- |
+| [`architecture-guardian`](./skills/architecture-guardian/SKILL.md) | Guard boundaries, ownership, and layering. | `bash scripts/setup-codex-skill.sh --skill architecture-guardian` | `Use $architecture-guardian to review this change for boundary drift, ownership issues, and layering problems.` |
+| [`artifact-contract-reviewer`](./skills/artifact-contract-reviewer/SKILL.md) | Protect schema and interface contracts. | `bash scripts/setup-codex-skill.sh --skill artifact-contract-reviewer` | `Use $artifact-contract-reviewer to review this change for schema, payload, and downstream contract risk.` |
+| [`codex-agent-orchestration`](./skills/codex-agent-orchestration/SKILL.md) | Orchestrate project Codex subagents. | `bash scripts/setup-codex-agent-orchestration-skill.sh` | `Use $codex-agent-orchestration to set up and run a project Codex subagent team.` |
+| [`deployment-engineer`](./skills/deployment-engineer/SKILL.md) | Plan simple, safe deployment paths. | `bash scripts/setup-codex-skill.sh --skill deployment-engineer` | `Use $deployment-engineer to plan the simplest feasible deployment path, including environments, release steps, rollback, and verification.` |
+| [`finance-engineer`](./skills/finance-engineer/SKILL.md) | Minimize feasible project and cloud costs. | `bash scripts/setup-codex-skill.sh --skill finance-engineer` | `Use $finance-engineer to review this project for lowest feasible cost, budget controls, cleanup plans, and FinOps risk.` |
+| [`llm-output-reviewer`](./skills/llm-output-reviewer/SKILL.md) | Review prompts and model-driven behavior. | `bash scripts/setup-codex-skill.sh --skill llm-output-reviewer` | `Use $llm-output-reviewer to review this change for prompt behavior, output validation, and fallback risks.` |
+| [`operations-engineer`](./skills/operations-engineer/SKILL.md) | Prepare projects for basic operations. | `bash scripts/setup-codex-skill.sh --skill operations-engineer` | `Use $operations-engineer to review this project for observability, recovery, runbooks, support burden, and launch readiness.` |
+| [`performance-optimizer`](./skills/performance-optimizer/SKILL.md) | Optimize performance-critical changes safely. | `bash scripts/setup-codex-skill.sh --skill performance-optimizer` | `Use $performance-optimizer to review this change for latency, throughput, caching, and duplicate-work issues.` |
+| [`playbook-installer`](./skills/playbook-installer/SKILL.md) | Onboard repositories to the playbook safely. | `bash scripts/setup-codex-skill.sh --skill playbook-installer` | `Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook safely and incrementally.` |
+| [`product-designer`](./skills/product-designer/SKILL.md) | Design specific, polished product experiences. | `bash scripts/setup-codex-skill.sh --skill product-designer` | `Use $product-designer to turn this idea or interface into a specific, polished, implementation-ready product design.` |
+| [`project-engineer`](./skills/project-engineer/SKILL.md) | Turn ideas into feasible project plans. | `bash scripts/setup-codex-skill.sh --skill project-engineer` | `Use $project-engineer to turn this idea or design into the simplest feasible project with design, deployment, security, operations, and cost guidance.` |
+| [`security-engineer`](./skills/security-engineer/SKILL.md) | Review security and tool reuse decisions. | `bash scripts/setup-codex-skill.sh --skill security-engineer` | `Use $security-engineer to review this plan or tool choice for security, permissions, secrets, supply-chain risk, and required scans.` |
+| [`scope-safety-guard`](./skills/scope-safety-guard/SKILL.md) | Enforce safety and external-effect boundaries. | `bash scripts/setup-codex-skill.sh --skill scope-safety-guard` | `Use $scope-safety-guard to review this change for permission, side-effect, and safety-boundary risks.` |
+| [`test-strategy-reviewer`](./skills/test-strategy-reviewer/SKILL.md) | Define the minimum safe verification bar. | `bash scripts/setup-codex-skill.sh --skill test-strategy-reviewer` | `Use $test-strategy-reviewer to define the minimum safe test plan and regression coverage for this change.` |
+
+Useful grouped installs:
 
 ```bash
-bash scripts/setup-codex-skill.sh --force
+# Default: install only playbook-installer
+bash scripts/setup-codex-skill.sh
+
+# Install all project engineering role skills
+bash scripts/setup-codex-skill.sh --all-project-engineering
+
+# Install every generated skill
+bash scripts/setup-codex-skill.sh --all-skills
+
+# List all installable generated skills
+bash scripts/setup-codex-skill.sh --list-skills
 ```
 
-When installing multiple skills, use `--force` to replace any matching installed copies:
+### Install And Use In Codex
 
-```bash
-bash scripts/setup-codex-skill.sh --all-project-engineering --force
-```
+Versioning note: this framework is versionless by design, but you can pin a snapshot by copying it into your repo.
 
-#### Restart Codex
-
-Newly installed skills are loaded on startup, so restart Codex after installation.
-
-#### Find the skill in Codex
+After installing a skill, restart Codex if it does not appear immediately.
 
 After restart:
 
 - use `/skills` to view or enable installed skills
 - do not expect custom skills to appear in the `/` slash-command palette
-- look for `Playbook Installer` in the skills list
-
-#### Invoke the skill
-
-Invoke the skill explicitly in a prompt with `$playbook-installer`.
+- look for the skill display name in the skills list
+- invoke explicitly with `$skill-name`
 
 Example:
 
@@ -231,10 +186,16 @@ Example:
 Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook.
 ```
 
-More specific example:
+Idea-to-project example:
 
 ```text
-Use $playbook-installer to onboard this repository to the AI-Engineering-Playbook, preserve existing repository-specific rules, and create a safe migration plan for AGENTS.md and skills/.
+Use $project-engineer, $product-designer, $deployment-engineer, $security-engineer, $operations-engineer, and $finance-engineer to turn this idea into the simplest feasible shipped project.
+```
+
+Agent orchestration example:
+
+```text
+Use $codex-agent-orchestration to set up and run a project Codex subagent team.
 ```
 
 ### Troubleshooting: `skill-installer`
