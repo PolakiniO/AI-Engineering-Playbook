@@ -4,6 +4,7 @@ description: Review or plan changes that affect latency, throughput, caching, ba
 metadata:
   short-description: Optimize performance-critical changes safely
 ---
+
 # performance-optimizer
 
 ## Purpose During Development

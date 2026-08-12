@@ -4,6 +4,7 @@ description: Assess verification scope, regression protection, and risk-based te
 metadata:
   short-description: Define the minimum safe verification bar
 ---
+
 # test-strategy-reviewer
 
 ## Purpose During Development

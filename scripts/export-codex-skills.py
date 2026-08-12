@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate Codex-compatible skill artifacts from vendor-neutral source skills."""
+"""Generate the public agent-skill and Codex distributions from canonical skills."""
 
 from __future__ import annotations
 
@@ -12,20 +12,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = REPO_ROOT / "skills"
 MANIFEST_PATH = SOURCE_DIR / "skill-manifest.json"
 DIST_DIR = REPO_ROOT / "dist" / "codex-skills"
-
-
-def frontmatter(name: str, description: str, short_description: str) -> str:
-    return "\n".join(
-        [
-            "---",
-            f"name: {name}",
-            f"description: {description}",
-            "metadata:",
-            f"  short-description: {short_description}",
-            "---",
-            "",
-        ]
-    )
+AGENT_DIST_DIR = REPO_ROOT / "dist" / "agent-skills"
+CATALOG_PATH = REPO_ROOT / "products" / "catalog.json"
 
 
 def openai_yaml(display_name: str, short_description: str, default_prompt: str) -> str:
@@ -40,12 +28,34 @@ def openai_yaml(display_name: str, short_description: str, default_prompt: str) 
     )
 
 
+def validate_frontmatter(skill_file: Path, skill_name: str) -> str:
+    body = skill_file.read_text()
+    expected_prefix = f"---\nname: {skill_name}\n"
+    if not body.startswith(expected_prefix) or "\n---\n" not in body:
+        raise SystemExit(
+            f"Canonical skill is missing valid frontmatter: {skill_file}"
+        )
+    return body
+
+
+def copy_resources(source_dir: Path, output_dir: Path) -> None:
+    for resource_name in ("scripts", "references", "assets"):
+        resource_dir = source_dir / resource_name
+        if resource_dir.is_dir():
+            shutil.copytree(resource_dir, output_dir / resource_name)
+
+
 def main() -> int:
     manifest = json.loads(MANIFEST_PATH.read_text())
+    catalog = json.loads(CATALOG_PATH.read_text())
 
     if DIST_DIR.exists():
         shutil.rmtree(DIST_DIR)
     DIST_DIR.mkdir(parents=True, exist_ok=True)
+
+    if AGENT_DIST_DIR.exists():
+        shutil.rmtree(AGENT_DIST_DIR)
+    AGENT_DIST_DIR.mkdir(parents=True, exist_ok=True)
 
     for skill_dir in sorted(path for path in SOURCE_DIR.iterdir() if path.is_dir()):
         skill_file = skill_dir / "SKILL.md"
@@ -59,16 +69,14 @@ def main() -> int:
         out_dir = DIST_DIR / skill_dir.name
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        body = skill_file.read_text()
+        body = validate_frontmatter(skill_file, skill_dir.name)
         out_file = out_dir / "SKILL.md"
-        out_file.write_text(
-            frontmatter(
-                name=skill_dir.name,
-                description=metadata["description"],
-                short_description=metadata["short_description"],
-            )
-            + body
-        )
+        out_file.write_text(body)
+
+        agent_out_dir = AGENT_DIST_DIR / skill_dir.name
+        agent_out_dir.mkdir(parents=True, exist_ok=True)
+        (agent_out_dir / "SKILL.md").write_text(body)
+        copy_resources(skill_dir, agent_out_dir)
 
         agents_dir = out_dir / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
@@ -80,12 +88,21 @@ def main() -> int:
             )
         )
 
-        for resource_name in ("scripts", "references", "assets"):
-            resource_dir = skill_dir / resource_name
-            if resource_dir.is_dir():
-                shutil.copytree(resource_dir, out_dir / resource_name)
+        copy_resources(skill_dir, out_dir)
+
+    (AGENT_DIST_DIR / "catalog.json").write_text(
+        json.dumps(catalog, indent=2) + "\n"
+    )
+    (AGENT_DIST_DIR / "README.md").write_text(
+        "# AI-Engineering-Playbook Agent Skills\n\n"
+        "This generated directory is the clean, frontmatter-compliant distribution "
+        "surface for Claude Code, Codex, Cursor, and other Agent Skills-compatible "
+        "tools. The canonical source remains `../../skills/`.\n\n"
+        "See [`catalog.json`](./catalog.json) for product bundles and install metadata.\n"
+    )
 
     print(f"Exported Codex skill artifacts to {DIST_DIR}")
+    print(f"Exported neutral agent skill artifacts to {AGENT_DIST_DIR}")
     return 0
 
 

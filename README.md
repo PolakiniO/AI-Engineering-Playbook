@@ -35,9 +35,10 @@ This is what a structured, senior-level AI code review should look like.
 
 - a reusable [`AGENTS.md`](./AGENTS.md) for repository-level governance  
 - a portable skill system under [`skills/`](./skills)  
-- a generic workflow playbook in [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md)  
+- a generic workflow playbook in [`skills/PLAYBOOK.md`](./skills/PLAYBOOK.md)
 - an idea-to-project engineering skill family covering design, deployment, security, operations, and FinOps
-- templates in [`templates/`](./templates) for adapting the framework safely  
+- templates in [`templates/`](./templates) for adapting the framework safely
+- two focused product bundles for free distribution in [`products/`](./products)
 - example overlays in:
   - [`examples/security-workflow/`](./examples/security-workflow)  
   - [`examples/backend-service/`](./examples/backend-service)  
@@ -55,6 +56,17 @@ They can be:
 - disconnected from repository boundaries  
 
 This framework enforces structure, discipline, and review quality without coupling governance into runtime code.
+
+## Product Bundles And Distribution
+
+The repository remains free and MIT-licensed. The generated [`dist/agent-skills/`](./dist/agent-skills) directory is the clean, frontmatter-compliant distribution surface for compatible agent-skill tools.
+
+The public product catalog groups the skills into:
+
+- **Production Code Review Guardrails** - architecture, contracts, safety, and testing
+- **AI Engineering Delivery Playbook** - project planning, security, deployment, operations, finance, and orchestration
+
+See [`products/README.md`](./products/README.md) for the bundle strategy and [`products/MARKETPLACE-SUBMISSIONS.md`](./products/MARKETPLACE-SUBMISSIONS.md) for the free-directory submission plan.
 
 ---
 

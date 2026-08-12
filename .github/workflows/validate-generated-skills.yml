@@ -21,5 +21,8 @@ jobs:
       - name: Regenerate Codex skill distribution
         run: python3 scripts/export-codex-skills.py
 
+      - name: Validate skill metadata and product bundles
+        run: python3 scripts/validate-skill-distribution.py
+
       - name: Fail if generated artifacts are stale
-        run: git diff --exit-code -- dist/codex-skills
+        run: git diff --exit-code -- dist/agent-skills dist/codex-skills

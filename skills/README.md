@@ -4,9 +4,15 @@ This directory contains reusable development-time reasoning skills for Codex and
 
 These files are not runtime code. They are governance artifacts that shape implementation and review behavior inside another repository.
 
-The files in this directory are the canonical vendor-neutral source format.
+The files in this directory are the canonical Agent Skills-compatible source
+format. Each `SKILL.md` includes standard YAML frontmatter so the same source
+can be discovered by agent-skill registries and transformed into tool-specific
+packages.
 
-If a specific tool needs extra packaging metadata, generate a derived distribution from this source rather than editing these files to match one tool's loader requirements.
+If a specific tool needs extra packaging metadata, generate a derived
+distribution from this source rather than editing these files to match one
+tool's loader requirements. Run `python3 scripts/export-codex-skills.py` to
+refresh `dist/agent-skills/` and `dist/codex-skills/`.
 
 ## Rules
 

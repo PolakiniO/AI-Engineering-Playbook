@@ -4,6 +4,7 @@ description: Review or plan changes that affect permissions, security boundaries
 metadata:
   short-description: Enforce safety and external-effect boundaries
 ---
+
 # scope-safety-guard
 
 ## Purpose During Development

@@ -26,7 +26,9 @@ This repository is a documentation and governance framework for coding-agent wor
 3. Do not add runtime code, build tooling, or deployment logic.
 4. Preserve strict-mode review behavior unless the change clearly improves it.
 5. When adding or editing a skill, keep its trigger conditions, anti-patterns, and output structure explicit.
-6. Do not introduce repo-specific logic into the framework core.
+6. Keep valid YAML frontmatter (`name`, `description`, and `metadata.short-description`) at the top of every canonical `SKILL.md`.
+7. Run `python3 scripts/export-codex-skills.py` and `python3 scripts/validate-skill-distribution.py` before submitting changes.
+8. Do not introduce repo-specific logic into the framework core.
 
 ## Proposing A New Skill
 

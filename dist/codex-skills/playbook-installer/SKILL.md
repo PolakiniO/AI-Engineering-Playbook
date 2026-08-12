@@ -4,6 +4,7 @@ description: Guide adoption of AI-Engineering-Playbook governance files in a por
 metadata:
   short-description: Onboard repositories to the playbook safely
 ---
+
 # playbook-installer
 
 ## Purpose During Development

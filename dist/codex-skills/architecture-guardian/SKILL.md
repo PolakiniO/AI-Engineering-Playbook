@@ -4,6 +4,7 @@ description: Review or plan changes that affect repository structure, layering, 
 metadata:
   short-description: Guard boundaries, ownership, and layering
 ---
+
 # architecture-guardian
 
 ## Purpose During Development

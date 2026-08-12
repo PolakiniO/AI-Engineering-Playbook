@@ -4,6 +4,7 @@ description: Review or plan changes that affect schemas, payloads, serialized ar
 metadata:
   short-description: Protect schema and interface contracts
 ---
+
 # artifact-contract-reviewer
 
 ## Purpose During Development

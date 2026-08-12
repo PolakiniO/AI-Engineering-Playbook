@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "project": "AI-Engineering-Playbook",
+  "distribution": {
+    "canonical_source": "skills/",
+    "generated_surface": "dist/agent-skills/",
+    "free_license": "MIT",
+    "install_command": "npx skills add PolakiniO/AI-Engineering-Playbook",
+    "current_focus": "free-distribution"
+  },
+  "bundles": [
+    {
+      "id": "production-code-review-guardrails",
+      "name": "Production Code Review Guardrails",
+      "positioning": "A focused review system for architecture, contracts, safety, and testing.",
+      "skills": [
+        "architecture-guardian",
+        "artifact-contract-reviewer",
+        "scope-safety-guard",
+        "test-strategy-reviewer"
+      ],
+      "free_distribution": true
+    },
+    {
+      "id": "ai-engineering-delivery-playbook",
+      "name": "AI Engineering Delivery Playbook",
+      "positioning": "A delivery lifecycle for planning, securing, deploying, operating, and funding AI-assisted projects.",
+      "skills": [
+        "project-engineer",
+        "security-engineer",
+        "deployment-engineer",
+        "operations-engineer",
+        "finance-engineer",
+        "codex-agent-orchestration"
+      ],
+      "free_distribution": true
+    }
+  ],
+  "free_addons": [
+    "playbook-installer",
+    "product-designer",
+    "performance-optimizer",
+    "llm-output-reviewer"
+  ],
+  "future_monetization": {
+    "status": "deferred",
+    "options": [
+      "repository-specific customization",
+      "private governance overlays",
+      "team onboarding",
+      "evaluation and benchmark packs",
+      "versioned maintenance updates",
+      "engineering workflow consulting"
+    ]
+  },
+  "marketplaces": [
+    {
+      "name": "SkillsMP",
+      "mode": "free-discovery",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    },
+    {
+      "name": "skills.sh",
+      "mode": "free-discovery-and-install",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    },
+    {
+      "name": "AI Agents Directory",
+      "mode": "free-directory-submission",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    },
+    {
+      "name": "SkillHub",
+      "mode": "free-discovery",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    },
+    {
+      "name": "OmniSkill",
+      "mode": "free-discovery",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    },
+    {
+      "name": "GitHub",
+      "mode": "canonical-open-source-source",
+      "source": "https://github.com/PolakiniO/AI-Engineering-Playbook"
+    }
+  ]
+}
