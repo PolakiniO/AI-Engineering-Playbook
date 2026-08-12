@@ -34,9 +34,8 @@ refresh.
 | --- | --- | --- |
 | SkillsMP | Awaiting next sync | Search for the repository and record the creator/skill URL |
 | skills.sh | Confirmed | `npx skills add PolakiniO/AI-Engineering-Playbook --list` found all 14 skills |
-| AI Agents Directory | Ready for free submission | Submit the public GitHub repository if not auto-discovered |
 | SkillHub | Awaiting crawl | Check the repository and individual skill pages after refresh |
-| OmniSkill | Ready for free submission | Submit the public GitHub repository URL and verify paths |
+| OmniSkill | Blocked by submission endpoint | Retry after the platform fixes its JSON response; the GitHub source is valid |
 
 As of the last check, a SkillsMP search did not yet show this repository. This is
 not a failure signal before the next scheduled sync. The skills.sh check is now
@@ -51,9 +50,8 @@ metric and its scope is clear.
 | --- | --- | --- | --- |
 | [skills.sh](https://skills.sh/PolakiniO/AI-Engineering-Playbook) | Confirmed | Install-count badge documented; based on anonymous CLI telemetry | Badge added to the root README |
 | [SkillsMP](https://skillsmp.com/) | Awaiting indexing | No public per-repository download badge documented in the API docs | Track listing status and link only after indexing |
-| [AI Agents Directory](https://aiagentsdirectory.com/skills) | Awaiting listing | Catalog pages show platform-level install figures, but no documented per-repository badge | Track listing status and link only |
 | [SkillHub](https://skills.palebluedot.live/) | Awaiting crawl | Public docs describe crawl/API behavior, but no per-repository download badge documented | Track listing status and link only |
-| [OmniSkill](https://omniskill.online/) | Awaiting listing | Submission is available, but the current public registry exposes no per-repository download badge | Track listing status and link only |
+| [OmniSkill](https://omniskill.online/) | Submission blocked | Registry documents per-skill `download_count`, but the verify form currently returns a JSON parsing error | Retry after platform repair; do not add a badge before indexing |
 
 Current supported badge:
 
@@ -63,6 +61,27 @@ When another platform is confirmed, add its badge only after checking the
 platform's own documentation or creator dashboard. Keep the platform status and
 the metric source in this file so the README does not imply cross-platform
 download parity.
+
+## OmniSkill submission diagnosis
+
+The repository URL is valid and publicly reachable. The error shown by the
+submission form — `Unexpected non-whitespace character after JSON at position 4`
+— is a client-side JSON parsing failure in OmniSkill's verify request. It means
+the form received a malformed or concatenated response where it expected one
+JSON document; it is not evidence that the repository URL or `SKILL.md` layout
+is invalid.
+
+Use the canonical URL without a trailing slash when retrying:
+
+```text
+https://github.com/PolakiniO/AI-Engineering-Playbook
+```
+
+If the same error remains, stop retrying and report it through OmniSkill's
+[issue tracker](https://github.com/diegosouzapw/awesome-omni-skill/issues). The
+current registry page also reports zero indexed skills, which supports treating
+this as an early-platform/backend issue rather than a repository configuration
+problem.
 
 ## Local validation
 
@@ -90,7 +109,6 @@ Validated 14 canonical skills and 2 product bundles
 - [x] Starter evaluation pack is present
 - [ ] SkillsMP indexing confirmed
 - [x] skills.sh indexing confirmed
-- [ ] AI Agents Directory listing confirmed
 - [ ] SkillHub indexing confirmed
 - [ ] OmniSkill listing confirmed
 

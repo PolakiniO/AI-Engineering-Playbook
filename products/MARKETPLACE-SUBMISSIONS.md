@@ -17,11 +17,10 @@ python3 scripts/validate-skill-distribution.py
   the repository README as the primary landing page.
 - **skills.sh**: use the generated frontmatter-compliant skills and the free
   install command from `products/catalog.json`.
-- **AI Agents Directory**: submit the repository as an open-source skill source.
 - **SkillHub**: allow the public repository to be crawled and review the listing
   after synchronization.
-- **OmniSkill**: submit the GitHub repository URL and verify the generated skill
-  paths appear correctly.
+- **OmniSkill**: submission is currently blocked by a platform-side response
+  parsing error; retry after the registry fixes its verification endpoint.
 
 ## Paid distribution — deferred
 
