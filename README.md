@@ -70,12 +70,19 @@ See [`products/README.md`](./products/README.md) for the bundle strategy and [`p
 
 ### Free distribution
 
-[![skills.sh installs](https://skills.sh/b/PolakiniO/AI-Engineering-Playbook)](https://skills.sh/PolakiniO/AI-Engineering-Playbook)
+[skills.sh CLI](https://www.skills.sh/docs) — source repository:
+[PolakiniO/AI-Engineering-Playbook](https://github.com/PolakiniO/AI-Engineering-Playbook)
 
-The skills.sh badge reports the platform's anonymous CLI install count. Other
-free directories are tracked in [`products/DISTRIBUTION-STATUS.md`](./products/DISTRIBUTION-STATUS.md)
-without invented download numbers until each platform provides a public
-per-repository metric.
+Install with:
+
+```bash
+npx skills add PolakiniO/AI-Engineering-Playbook
+```
+
+The install-count badge will be added after skills.sh provisions a public
+registry resource for this repository. Other free directories are tracked in
+[`products/DISTRIBUTION-STATUS.md`](./products/DISTRIBUTION-STATUS.md) without
+invented download numbers.
 
 ---
 

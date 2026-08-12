@@ -38,8 +38,9 @@ refresh.
 | OmniSkill | Blocked by submission endpoint | Retry after the platform fixes its JSON response; the GitHub source is valid |
 
 As of the last check, a SkillsMP search did not yet show this repository. This is
-not a failure signal before the next scheduled sync. The skills.sh check is now
-confirmed independently from the web leaderboard.
+not a failure signal before the next scheduled sync. The skills.sh check confirms
+that the GitHub source can be discovered by the CLI; it does not yet confirm a
+public leaderboard resource or install counter.
 
 ## Platform badges and metrics
 
@@ -48,14 +49,23 @@ metric and its scope is clear.
 
 | Platform | Verification state | Public metric support | Repository treatment |
 | --- | --- | --- | --- |
-| [skills.sh](https://skills.sh/PolakiniO/AI-Engineering-Playbook) | Confirmed | Install-count badge documented; based on anonymous CLI telemetry | Badge added to the root README |
+| [skills.sh](https://www.skills.sh/docs) | CLI discovery confirmed; badge unavailable | Install-count badge is documented, but this source currently returns `resource not found` at the badge endpoint | Use a plain GitHub source link until skills.sh provisions the registry resource |
 | [SkillsMP](https://skillsmp.com/) | Awaiting indexing | No public per-repository download badge documented in the API docs | Track listing status and link only after indexing |
 | [SkillHub](https://skills.palebluedot.live/) | Awaiting crawl | Public docs describe crawl/API behavior, but no per-repository download badge documented | Track listing status and link only |
 | [OmniSkill](https://omniskill.online/) | Submission blocked | Registry documents per-skill `download_count`, but the verify form currently returns a JSON parsing error | Retry after platform repair; do not add a badge before indexing |
 
-Current supported badge:
+Current supported badge: **None**
 
-[![skills.sh installs](https://skills.sh/b/PolakiniO/AI-Engineering-Playbook)](https://skills.sh/PolakiniO/AI-Engineering-Playbook)
+The documented skills.sh badge format is:
+
+```markdown
+[![skills.sh](https://skills.sh/b/owner/repo)](https://skills.sh/owner/repo)
+```
+
+For this repository, that endpoint currently returns `resource not found`.
+The previous `npx skills add PolakiniO/AI-Engineering-Playbook --list` check
+verified source discovery and listed all 14 skills, but did not establish that a
+public install-count resource had been created.
 
 When another platform is confirmed, add its badge only after checking the
 platform's own documentation or creator dashboard. Keep the platform status and
