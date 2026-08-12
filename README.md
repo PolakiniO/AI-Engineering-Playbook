@@ -68,6 +68,15 @@ The public product catalog groups the skills into:
 
 See [`products/README.md`](./products/README.md) for the bundle strategy and [`products/MARKETPLACE-SUBMISSIONS.md`](./products/MARKETPLACE-SUBMISSIONS.md) for the free-directory submission plan.
 
+### Free distribution
+
+[![skills.sh installs](https://skills.sh/b/PolakiniO/AI-Engineering-Playbook)](https://skills.sh/PolakiniO/AI-Engineering-Playbook)
+
+The skills.sh badge reports the platform's anonymous CLI install count. Other
+free directories are tracked in [`products/DISTRIBUTION-STATUS.md`](./products/DISTRIBUTION-STATUS.md)
+without invented download numbers until each platform provides a public
+per-repository metric.
+
 ---
 
 ## Who This Is For

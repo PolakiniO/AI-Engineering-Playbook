@@ -42,6 +42,28 @@ As of the last check, a SkillsMP search did not yet show this repository. This i
 not a failure signal before the next scheduled sync. The skills.sh check is now
 confirmed independently from the web leaderboard.
 
+## Platform badges and metrics
+
+Only add a numeric badge when the platform documents a public per-repository
+metric and its scope is clear.
+
+| Platform | Verification state | Public metric support | Repository treatment |
+| --- | --- | --- | --- |
+| [skills.sh](https://skills.sh/PolakiniO/AI-Engineering-Playbook) | Confirmed | Install-count badge documented; based on anonymous CLI telemetry | Badge added to the root README |
+| [SkillsMP](https://skillsmp.com/) | Awaiting indexing | No public per-repository download badge documented in the API docs | Track listing status and link only after indexing |
+| [AI Agents Directory](https://aiagentsdirectory.com/skills) | Awaiting listing | Catalog pages show platform-level install figures, but no documented per-repository badge | Track listing status and link only |
+| [SkillHub](https://skills.palebluedot.live/) | Awaiting crawl | Public docs describe crawl/API behavior, but no per-repository download badge documented | Track listing status and link only |
+| [OmniSkill](https://omniskill.online/) | Awaiting listing | Submission is available, but the current public registry exposes no per-repository download badge | Track listing status and link only |
+
+Current supported badge:
+
+[![skills.sh installs](https://skills.sh/b/PolakiniO/AI-Engineering-Playbook)](https://skills.sh/PolakiniO/AI-Engineering-Playbook)
+
+When another platform is confirmed, add its badge only after checking the
+platform's own documentation or creator dashboard. Keep the platform status and
+the metric source in this file so the README does not imply cross-platform
+download parity.
+
 ## Local validation
 
 Run from the repository root:
