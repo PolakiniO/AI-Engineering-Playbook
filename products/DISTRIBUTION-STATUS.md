@@ -7,9 +7,9 @@ Release commit: **5b0dd88** (`Prepare free agent skills distribution`)
 
 ## Overall status
 
-**Ready for the next registry scan.** The repository is public, the skills are
-frontmatter-compliant, the required GitHub topics were added, and the generated
-distribution artifacts pass local validation.
+**Free distribution is validated on GitHub and skills.sh.** The repository is
+public, the skills are frontmatter-compliant, the required GitHub topics were
+added, and the generated distribution artifacts pass local validation.
 
 This does not yet mean every registry has indexed the repository. Registry
 crawlers and sync schedules are external and must be checked after their next
@@ -33,13 +33,14 @@ refresh.
 | Registry | Current status | Next action |
 | --- | --- | --- |
 | SkillsMP | Awaiting next sync | Search for the repository and record the creator/skill URL |
-| skills.sh | Ready to verify | Search by repository or install one skill with `npx skills add` |
+| skills.sh | Confirmed | `npx skills add PolakiniO/AI-Engineering-Playbook --list` found all 14 skills |
 | AI Agents Directory | Ready for free submission | Submit the public GitHub repository if not auto-discovered |
 | SkillHub | Awaiting crawl | Check the repository and individual skill pages after refresh |
 | OmniSkill | Ready for free submission | Submit the public GitHub repository URL and verify paths |
 
 As of the last check, a SkillsMP search did not yet show this repository. This is
-not a failure signal before the next scheduled sync.
+not a failure signal before the next scheduled sync. The skills.sh check is now
+confirmed independently from the web leaderboard.
 
 ## Local validation
 
@@ -66,7 +67,7 @@ Validated 14 canonical skills and 2 product bundles
 - [x] Free bundle catalog is present
 - [x] Starter evaluation pack is present
 - [ ] SkillsMP indexing confirmed
-- [ ] skills.sh indexing confirmed
+- [x] skills.sh indexing confirmed
 - [ ] AI Agents Directory listing confirmed
 - [ ] SkillHub indexing confirmed
 - [ ] OmniSkill listing confirmed
