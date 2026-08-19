@@ -1,6 +1,6 @@
 # Codex Agent Team Template
 
-Use these templates as starting points. Rename agents for the project domain, but keep names stable after other docs or prompts refer to them.
+Use these templates as starting points. Prefer names that combine role and concrete job, such as `architect_plan_mapper` or `backend_api_service_builder`. Add the project slug as a prefix when the team is project-local, for example `companyos_backend_api_service_builder`. Keep names stable after other docs or prompts refer to them.
 
 ## `.codex/config.toml`
 
@@ -12,11 +12,11 @@ default_subagent_model = "gpt-5.6-terra"
 default_subagent_reasoning_effort = "medium"
 ```
 
-## `.codex/agents/architect.toml`
+## `.codex/agents/architect_plan_mapper.toml`
 
 ```toml
-name = "architect"
-description = "Read-only architect responsible for requirements analysis, repository mapping, risks, and implementation planning."
+name = "architect_plan_mapper"
+description = "Read-only architect plan mapper responsible for requirements analysis, repository mapping, risks, and implementation planning."
 model = "gpt-5.6"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
@@ -30,11 +30,11 @@ Do not modify files.
 """
 ```
 
-## `.codex/agents/backend.toml`
+## `.codex/agents/backend_api_service_builder.toml`
 
 ```toml
-name = "backend"
-description = "Backend implementation specialist for APIs, persistence, services, jobs, and server-side code."
+name = "backend_api_service_builder"
+description = "Backend API and service builder for APIs, persistence, services, jobs, and server-side code."
 model = "gpt-5.6"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
@@ -48,11 +48,11 @@ Do not commit, push, publish, deploy, or edit unrelated files.
 """
 ```
 
-## `.codex/agents/frontend.toml`
+## `.codex/agents/frontend_ui_flow_builder.toml`
 
 ```toml
-name = "frontend"
-description = "Frontend specialist for UI, client state, accessibility, loading/error states, and browser-facing integrations."
+name = "frontend_ui_flow_builder"
+description = "Frontend UI flow builder for UI, client state, accessibility, loading/error states, and browser-facing integrations."
 model = "gpt-5.6"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
@@ -65,11 +65,11 @@ Do not commit, push, publish, deploy, or edit unrelated files.
 """
 ```
 
-## `.codex/agents/tester.toml`
+## `.codex/agents/tester_regression_checker.toml`
 
 ```toml
-name = "tester"
-description = "Testing specialist responsible for validation, regression checks, edge cases, and missing coverage."
+name = "tester_regression_checker"
+description = "Testing regression checker responsible for validation, regression checks, edge cases, and missing coverage."
 model = "gpt-5.6-terra"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
@@ -84,11 +84,11 @@ Do not refactor unrelated code.
 """
 ```
 
-## `.codex/agents/security.toml`
+## `.codex/agents/security_risk_boundary_reviewer.toml`
 
 ```toml
-name = "security"
-description = "Read-only security reviewer for auth, permissions, secrets, untrusted input, data exposure, payments, and deployment risk."
+name = "security_risk_boundary_reviewer"
+description = "Read-only security risk boundary reviewer for auth, permissions, secrets, untrusted input, data exposure, payments, and deployment risk."
 model = "gpt-5.6"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"
@@ -101,11 +101,11 @@ Do not modify files.
 """
 ```
 
-## `.codex/agents/reviewer.toml`
+## `.codex/agents/reviewer_quality_gate_reviewer.toml`
 
 ```toml
-name = "reviewer"
-description = "Read-only senior reviewer focused on correctness, architecture, maintainability, regressions, and missing tests."
+name = "reviewer_quality_gate_reviewer"
+description = "Read-only quality gate reviewer focused on correctness, architecture, maintainability, regressions, and missing tests."
 model = "gpt-5.6"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"

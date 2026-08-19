@@ -2,6 +2,8 @@
 
 Sets up project-local Codex subagent teams and reusable orchestration workflows.
 
+Generated agents use clear names that combine project, role, and job, such as `companyos_architect_plan_mapper`, `companyos_backend_api_service_builder`, and `companyos_tester_regression_checker`.
+
 ## Install
 
 Use the dedicated installer when you only want this skill:
@@ -31,3 +33,5 @@ To run the generator directly after installation:
 ```bash
 python ~/.codex/skills/codex-agent-orchestration/scripts/generate_project_agents.py --project .
 ```
+
+Add `--generic-names` when you want portable role/job names without the project prefix, such as `architect_plan_mapper`.

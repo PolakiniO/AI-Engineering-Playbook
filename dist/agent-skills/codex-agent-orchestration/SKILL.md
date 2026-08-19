@@ -11,6 +11,8 @@ metadata:
 
 Use this skill to turn any repository into a Codex-orchestrated software team. The project-local layer is `.codex/agents/*.toml`; the reusable workflow layer is this skill; the repo instruction layer is `AGENTS.md`.
 
+Generated agents are named by project, role, and job so their purpose is clear at a glance, for example `companyos_backend_api_service_builder` or `companyos_tester_regression_checker`.
+
 Prefer the bundled generator for new or updated projects:
 
 ```bash
@@ -30,7 +32,7 @@ Read [agent-team-template.md](references/agent-team-template.md) only when manua
 1. Inspect the repository shape and existing instructions.
 2. Run `generate_project_agents.py --project <repo>` to synthesize the agent team from detected project signals.
 3. Review the generated plan in the script output. Re-run with `--dry-run` first when the repository already has hand-written `.codex` files or an `AGENTS.md`.
-4. Keep or tune the generated agents. Use `--generic-names` only when the user prefers portable names such as `architect` and `reviewer`; otherwise let the generator prefix names with the project slug.
+4. Keep or tune the generated agents. Default names use `<project>_<role>_<job>`. Use `--generic-names` only when the user prefers portable names such as `architect_plan_mapper` and `reviewer_quality_gate_reviewer`.
 5. Validate TOML syntax and confirm every custom agent defines `name`, `description`, and `developer_instructions`.
 
 ## Running The Team

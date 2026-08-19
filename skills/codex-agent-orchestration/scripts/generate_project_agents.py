@@ -25,12 +25,126 @@ class ProjectProfile:
     roles: tuple[str, ...]
 
 
+@dataclass(frozen=True)
+class RoleSpec:
+    sandbox: str
+    model: str
+    effort: str
+    job_slug: str
+    job_title: str
+    focus: str
+
+
+ROLE_SPECS = {
+    "architect": RoleSpec(
+        "read-only",
+        "gpt-5.6",
+        "high",
+        "plan_mapper",
+        "plan mapper",
+        "requirements, repository mapping, risks, and implementation sequencing",
+    ),
+    "backend": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "api_service_builder",
+        "API and service builder",
+        "APIs, services, server-side logic, jobs, and persistence boundaries",
+    ),
+    "frontend": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "ui_flow_builder",
+        "UI flow builder",
+        "UI, client state, accessibility, loading/error states, and browser-facing integrations",
+    ),
+    "database": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "data_modeler",
+        "data modeler",
+        "schema, migrations, queries, indexes, and data integrity",
+    ),
+    "mobile": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "mobile_flow_builder",
+        "mobile flow builder",
+        "mobile app flows, native integrations, and device-specific validation",
+    ),
+    "ai": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "model_integration_builder",
+        "model integration builder",
+        "LLM, agent, retrieval, prompt, evaluation, and model-integration work",
+    ),
+    "builder": RoleSpec(
+        "workspace-write",
+        "gpt-5.6",
+        "high",
+        "feature_builder",
+        "feature builder",
+        "general implementation work after an approved plan exists",
+    ),
+    "infra": RoleSpec(
+        "workspace-write",
+        "gpt-5.6-terra",
+        "high",
+        "delivery_pipeline_builder",
+        "delivery pipeline builder",
+        "deployment, CI, containers, infrastructure, observability, and rollback",
+    ),
+    "tester": RoleSpec(
+        "workspace-write",
+        "gpt-5.6-terra",
+        "high",
+        "regression_checker",
+        "regression checker",
+        "validation, regression tests, edge cases, and coverage gaps",
+    ),
+    "security": RoleSpec(
+        "read-only",
+        "gpt-5.6",
+        "xhigh",
+        "risk_boundary_reviewer",
+        "risk boundary reviewer",
+        "auth, permissions, secrets, untrusted input, data exposure, payments, and deployment risk",
+    ),
+    "reviewer": RoleSpec(
+        "read-only",
+        "gpt-5.6",
+        "xhigh",
+        "quality_gate_reviewer",
+        "quality gate reviewer",
+        "correctness, architecture, maintainability, regressions, and missing tests",
+    ),
+    "judge": RoleSpec(
+        "read-only",
+        "gpt-5.6",
+        "xhigh",
+        "release_decision_coordinator",
+        "release decision coordinator",
+        "cross-agent synthesis, release blocking decisions, and fix-loop routing",
+    ),
+}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate project-scoped Codex custom agents.")
     parser.add_argument("--project", default=".", help="Target repository root.")
     parser.add_argument("--dry-run", action="store_true", help="Print the generated plan without writing files.")
     parser.add_argument("--force", action="store_true", help="Overwrite existing generated agent files.")
-    parser.add_argument("--generic-names", action="store_true", help="Use names like architect instead of project_prefixed names.")
+    parser.add_argument(
+        "--generic-names",
+        action="store_true",
+        help="Use role_job names like architect_plan_mapper instead of project-prefixed names.",
+    )
     args = parser.parse_args()
 
     root = Path(args.project).expanduser().resolve()
@@ -138,34 +252,28 @@ def profile_project(root: Path) -> ProjectProfile:
 def build_agents(profile: ProjectProfile, *, prefixed: bool) -> dict[str, str]:
     result: dict[str, str] = {}
     for role in profile.roles:
-        name = f"{profile.slug}_{role}" if prefixed else role
-        result[name.replace("-", "_")] = agent_toml(profile, role, name.replace("-", "_"))
+        name = agent_name(profile, role, prefixed=prefixed)
+        result[name] = agent_toml(profile, role, name)
     return result
 
 
+def agent_name(profile: ProjectProfile, role: str, *, prefixed: bool) -> str:
+    spec = ROLE_SPECS[role]
+    parts = [role, spec.job_slug]
+    if prefixed:
+        parts.insert(0, profile.slug)
+    return "_".join(parts).replace("-", "_")
+
+
 def agent_toml(profile: ProjectProfile, role: str, name: str) -> str:
-    specs = {
-        "architect": ("read-only", "gpt-5.6", "high", "requirements, repository mapping, risks, and implementation sequencing"),
-        "backend": ("workspace-write", "gpt-5.6", "high", "APIs, services, server-side logic, jobs, and persistence boundaries"),
-        "frontend": ("workspace-write", "gpt-5.6", "high", "UI, client state, accessibility, loading/error states, and browser-facing integrations"),
-        "database": ("workspace-write", "gpt-5.6", "high", "schema, migrations, queries, indexes, and data integrity"),
-        "mobile": ("workspace-write", "gpt-5.6", "high", "mobile app flows, native integrations, and device-specific validation"),
-        "ai": ("workspace-write", "gpt-5.6", "high", "LLM, agent, retrieval, prompt, evaluation, and model-integration work"),
-        "builder": ("workspace-write", "gpt-5.6", "high", "general implementation work after an approved plan exists"),
-        "infra": ("workspace-write", "gpt-5.6-terra", "high", "deployment, CI, containers, infrastructure, observability, and rollback"),
-        "tester": ("workspace-write", "gpt-5.6-terra", "high", "validation, regression tests, edge cases, and coverage gaps"),
-        "security": ("read-only", "gpt-5.6", "xhigh", "auth, permissions, secrets, untrusted input, data exposure, payments, and deployment risk"),
-        "reviewer": ("read-only", "gpt-5.6", "xhigh", "correctness, architecture, maintainability, regressions, and missing tests"),
-        "judge": ("read-only", "gpt-5.6", "xhigh", "cross-agent synthesis, release blocking decisions, and fix-loop routing"),
-    }
-    sandbox, model, effort, focus = specs[role]
+    spec = ROLE_SPECS[role]
     instructions = instructions_for(role, profile)
     return f'''{GENERATED}
 name = "{name}"
-description = "{profile.display_name} {role} agent for {focus}."
-model = "{model}"
-model_reasoning_effort = "{effort}"
-sandbox_mode = "{sandbox}"
+description = "{profile.display_name} {role} agent ({spec.job_title}) for {spec.focus}."
+model = "{spec.model}"
+model_reasoning_effort = "{spec.effort}"
+sandbox_mode = "{spec.sandbox}"
 
 developer_instructions = """
 {instructions}
@@ -174,8 +282,9 @@ developer_instructions = """
 
 
 def instructions_for(role: str, profile: ProjectProfile) -> str:
+    spec = ROLE_SPECS[role]
     common = (
-        f"You are the {profile.display_name} {role} specialist.\n"
+        f"You are the {profile.display_name} {role} specialist for the job: {spec.job_title}.\n"
         "Follow existing repository conventions and keep work bounded to the parent task.\n"
         "Do not commit, push, publish, deploy, rotate secrets, or change access controls.\n"
     )
@@ -198,15 +307,17 @@ def instructions_for(role: str, profile: ProjectProfile) -> str:
 
 def agents_markdown(profile: ProjectProfile, agents: dict[str, str]) -> str:
     names = list(agents)
-    architect = next(name for name in names if name.endswith("_architect") or name == "architect")
-    tester = next(name for name in names if name.endswith("_tester") or name == "tester")
-    reviewer = next(name for name in names if name.endswith("_reviewer") or name == "reviewer")
+    architect = find_agent_for_role(names, "architect")
+    tester = find_agent_for_role(names, "tester")
+    reviewer = find_agent_for_role(names, "reviewer")
     implementers = [
         name for name in names
-        if name not in {architect, tester, reviewer} and not name.endswith(("_security", "_judge")) and name not in {"security", "judge"}
+        if name not in {architect, tester, reviewer}
+        and not has_agent_role(name, "security")
+        and not has_agent_role(name, "judge")
     ]
-    security = next((name for name in names if name.endswith("_security") or name == "security"), None)
-    judge = next((name for name in names if name.endswith("_judge") or name == "judge"), None)
+    security = next((name for name in names if has_agent_role(name, "security")), None)
+    judge = next((name for name in names if has_agent_role(name, "judge")), None)
     lines = [
         START,
         "# Codex Agent Orchestration",
@@ -235,6 +346,15 @@ def agents_markdown(profile: ProjectProfile, agents: dict[str, str]) -> str:
         "",
     ])
     return "\n".join(lines)
+
+
+def find_agent_for_role(names: list[str], role: str) -> str:
+    return next(name for name in names if has_agent_role(name, role))
+
+
+def has_agent_role(name: str, role: str) -> bool:
+    role_job_suffix = f"{role}_{ROLE_SPECS[role].job_slug}"
+    return name == role or name == role_job_suffix or name.endswith(f"_{role_job_suffix}")
 
 
 def ensure_config(path: Path, config: str) -> None:
