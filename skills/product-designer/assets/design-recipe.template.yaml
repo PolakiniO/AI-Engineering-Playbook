@@ -1,0 +1,95 @@
+# Development-time design contract, not a runtime schema or enforced policy.
+# Replace TODO values; preserve explicit unknowns. Adapt types to the target project.
+# Do not mark reviewed until implementation and required quality gates have passed.
+recipe_id: "TODO-kebab-case-name"
+status: draft # draft | reviewed | deprecated
+purpose: "TODO user task this pattern supports"
+audience: "TODO"
+use_when: []
+avoid_when: []
+
+implementation:
+  state: specification-only # specification-only | implemented
+  source_paths: [] # Actual existing implementation paths, not aspirational paths.
+  framework_constraints: []
+  existing_primitives: []
+  design_tokens: []
+  new_dependencies: []
+
+provenance:
+  origin: original # original | adapted
+  references: [] # Source/path, inspected scope/date, revision, and borrowed principle.
+  third_party_assets: [] # Per-asset license/permission, attribution, and permitted use.
+  unresolved_rights: [] # Nonempty entries block redistribution of affected assets.
+  publication_scope: repository-local
+  contains_private_material: null # Set true/false only after inspection.
+
+data_contract:
+  source_of_truth: "TODO actual schema, artifact, or API boundary"
+  required_fields:
+    - name: "TODO"
+      type: "TODO"
+      meaning: "TODO"
+      missing_behavior: "TODO explicit error or unknown state; never fabricate"
+  optional_fields: []
+  identity_and_traceability: "TODO stable IDs and source reference behavior"
+  units_denominators_and_time_windows: "TODO or not-applicable with reason"
+  synthetic_fixture_label: "TODO or not-applicable with reason"
+
+presentation:
+  hierarchy: []
+  density: "TODO"
+  typography_and_spacing: "TODO existing tokens and intended hierarchy"
+  primary_action: "TODO"
+  progressive_disclosure: []
+  must_remain_visible: [] # Include material limitations and action/approval status.
+
+states:
+  loading: "TODO"
+  empty: "TODO distinguish an empty result from unavailable data"
+  error: "TODO actionable, non-sensitive feedback"
+  partial: "TODO missing coverage and limits"
+  stale: "TODO freshness indication"
+  conflicting: "TODO or not-applicable with reason"
+  permission_denied: "TODO or not-applicable with reason"
+  success: "TODO actual success condition"
+
+interaction:
+  keyboard_and_focus: "TODO"
+  navigation_and_state_preservation: "TODO"
+  irreversible_actions_and_approvals: "TODO or not-applicable with reason"
+  motion_and_reduced_motion: "TODO default to no unnecessary motion"
+
+accessibility:
+  semantic_structure_and_labels: "TODO"
+  contrast_and_non_color_cues: "TODO"
+  screen_reader_behavior: "TODO"
+  target_sizes: "TODO"
+  chart_or_visual_alternative: "TODO or not-applicable with reason"
+
+responsive:
+  narrow_view: "TODO hierarchy and controls, not just scaled-down desktop"
+  wide_view: "TODO"
+  long_content_and_zoom: "TODO"
+  localization_and_rtl: "TODO or not-applicable with reason"
+
+constraints:
+  - "Preserve source meaning, uncertainty, authorization, and existing behavior."
+  - "Do not invent metrics, citations, confidence, events, or validation results."
+  - "Do not add external calls, dependencies, or publication without authorization."
+
+acceptance_checks:
+  - id: "TODO-check-id"
+    requirement: "TODO observable condition"
+    method: "TODO reproducible steps or existing test command"
+    expected_result: "TODO"
+    result: not-run # pass | fail | not-run | not-applicable
+    evidence: []
+    exception_reason: null
+
+review:
+  reviewer: null
+  reviewed_revision: null
+  evidence_paths: []
+  unresolved_gates: []
+  revalidate_when: [] # Data contracts, dependencies, tokens, or interaction behavior change.
